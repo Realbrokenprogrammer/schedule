@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -17,6 +19,7 @@ import javax.persistence.Id;
  * @TODO: 
  *  Go through entire file, this is just a Entity skeleton.
  *  Make sure its connected properly.
+ *  Read: http://www.tutorialspoint.com/jpa/index.htm 
  */
 @Entity
 public class UserEntity implements Serializable {
@@ -26,6 +29,18 @@ public class UserEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
+    protected String user_type;
+    @NotNull
+    protected String username;
+    @NotNull
+    protected String password; //TEMP
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+        +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+        +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+             message="{invalid.email}")
+    protected String email;
+    
     public Long getId() {
         return id;
     }
