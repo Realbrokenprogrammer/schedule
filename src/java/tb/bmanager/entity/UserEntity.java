@@ -20,7 +20,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -32,18 +31,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "USER")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
-    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
-    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
-    @NamedQuery(name = "User.findByDisplayname", query = "SELECT u FROM User u WHERE u.displayname = :displayname"),
-    @NamedQuery(name = "User.findByWebsiteurl", query = "SELECT u FROM User u WHERE u.websiteurl = :websiteurl"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
-    @NamedQuery(name = "User.findByFollowers", query = "SELECT u FROM User u WHERE u.followers = :followers"),
-    @NamedQuery(name = "User.findByFollows", query = "SELECT u FROM User u WHERE u.follows = :follows"),
-    @NamedQuery(name = "User.findByProjects", query = "SELECT u FROM User u WHERE u.projects = :projects"),
-    @NamedQuery(name = "User.findByJoindate", query = "SELECT u FROM User u WHERE u.joindate = :joindate"),
-    @NamedQuery(name = "User.findByProfileimg", query = "SELECT u FROM User u WHERE u.profileimg = :profileimg")})
+    @NamedQuery(name = "UserEntity.findAll", query = "SELECT u FROM UserEntity u"),
+    @NamedQuery(name = "UserEntity.findById", query = "SELECT u FROM UserEntity u WHERE u.id = :id"),
+    @NamedQuery(name = "UserEntity.findByUsername", query = "SELECT u FROM UserEntity u WHERE u.username = :username"),
+    @NamedQuery(name = "UserEntity.findByPassword", query = "SELECT u FROM UserEntity u WHERE u.password = :password"),
+    @NamedQuery(name = "UserEntity.findByDisplayname", query = "SELECT u FROM UserEntity u WHERE u.displayname = :displayname"),
+    @NamedQuery(name = "UserEntity.findByWebsiteurl", query = "SELECT u FROM UserEntity u WHERE u.websiteurl = :websiteurl"),
+    @NamedQuery(name = "UserEntity.findByEmail", query = "SELECT u FROM UserEntity u WHERE u.email = :email"),
+    @NamedQuery(name = "UserEntity.findByFollowers", query = "SELECT u FROM UserEntity u WHERE u.followers = :followers"),
+    @NamedQuery(name = "UserEntity.findByFollows", query = "SELECT u FROM UserEntity u WHERE u.follows = :follows"),
+    @NamedQuery(name = "UserEntity.findByProjects", query = "SELECT u FROM UserEntity u WHERE u.projects = :projects"),
+    @NamedQuery(name = "UserEntity.findByJoindate", query = "SELECT u FROM UserEntity u WHERE u.joindate = :joindate"),
+    @NamedQuery(name = "UserEntity.findByProfileimg", query = "SELECT u FROM UserEntity u WHERE u.profileimg = :profileimg")})
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,7 +69,7 @@ public class UserEntity implements Serializable {
     @Size(max = 200)
     @Column(name = "websiteurl")
     private String websiteurl;
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 255)
     @Column(name = "email")
     private String email;
@@ -232,7 +231,7 @@ public class UserEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "tb.bmanager.entity.User[ id=" + id + " ]";
+        return "tb.bmanager.entity.UserEntity[ id=" + id + " ]";
     }
     
 }

@@ -53,12 +53,10 @@ public class DBAccessorBean implements DBAccessorBeanLocal {
                     while(rs.next()){
                         //Retrieve by column name
                         int id  = rs.getInt("id");
-                        String first = rs.getString("user_type");
                         String last = rs.getString("username");
 
                         //Display values
                         System.out.print("ID: " + id);
-                        System.out.print(", User Type: " + first);
                         System.out.println(", Username: " + last);
                      }
                 } catch (SQLException ex){
