@@ -6,15 +6,23 @@
     
     <f:metadata>
         <f:viewParam name="id" value="#{userManagedBean.userId}" />
-        <f:viewAction action="#{userManagedBean.init}" />
+        <f:viewAction action="#{userManagedBean.init()}" />
     </f:metadata>
     <h:head>
         <title>User Details</title>
     </h:head>
     <h:body>
+        <h1># #{userManagedBean.userId}</h1>
         <h:messages />
         <h:panelGrid columns="2" rendered="#{not empty userManagedBean.user}">
-            
+            <h:outputText value="ID" />
+            <h:outputText value="#{userManagedBean.user.id}" />
+
+            <h:outputText value="Name" />
+            <h:outputText value="#{userManagedBean.user.displayname}" />
+
+            <h:outputText value="Email" />
+            <h:outputText value="#{userManagedBean.user.email}" />
         </h:panelGrid>
         <h:link value="Back to all users" outcome="index" />
     </h:body>

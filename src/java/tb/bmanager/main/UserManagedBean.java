@@ -9,6 +9,7 @@ import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -20,8 +21,8 @@ import tb.bmanager.entitymanager.UserEntityFacade;
  * @author oskarmendel
  */
 @Named(value = "userManagedBean")
-@Dependent
-@ViewScoped
+
+@RequestScoped
 @ManagedBean
 public class UserManagedBean {
     
@@ -39,7 +40,7 @@ public class UserManagedBean {
     int projects;
     UserEntity user;
     
-    private Long userId;
+    private int userId;
     
     /**
      * Creates a new instance of UserManagedBean
@@ -48,12 +49,6 @@ public class UserManagedBean {
     }
     
     public void init() {
-        if (userId == null) {
-            String message = "Bad request. Please use a link from within the system.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
-            return;
-        }
 
         user = userFacade.find(userId);
 
@@ -72,11 +67,11 @@ public class UserManagedBean {
         return this.user;
     }
     
-     public Long getUserId() {
+     public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
     
