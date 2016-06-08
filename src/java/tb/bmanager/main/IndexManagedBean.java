@@ -26,9 +26,9 @@ import tb.bmanager.auth.RegisterActionBeanLocal;
 @ManagedBean
 public class IndexManagedBean implements Serializable{
     
+    //Injecting EJBs
     @EJB 
     private RegisterActionBeanLocal register;
-    //RegisterActionBean register = new RegisterActionBean();
     
     Connection conn = null;
     Statement stmt = null;
@@ -41,14 +41,7 @@ public class IndexManagedBean implements Serializable{
         
     }
     
-    //@PostConstruct 
-    //public void init() { 
-    //      This used to be what i had to do but now works in the hellomsg method
-    //     register.getConnection();
-    //}
-    
     public String helloMsg(){
-        register.getConnection();
         return "Welcome from TeamB";
     }
     

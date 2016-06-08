@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <f:metadata>
+        <f:viewParam name="id" value="#{userManagedBean.userId}" />
+        <f:viewAction action="#{userManagedBean.init}" />
+    </f:metadata>
+    <h:head>
+        <title>User Details</title>
+    </h:head>
+    <h:body>
+        <h:messages />
+        <h:panelGrid columns="2" rendered="#{not empty userManagedBean.user}">
+            
+        </h:panelGrid>
+        <h:link value="Back to all users" outcome="index" />
+    </h:body>
+
+</html>

@@ -28,6 +28,6 @@ public class RegisterActionBean implements RegisterActionBeanLocal {
     // "Insert Code > Add Business Method")
     
     public void getConnection(){
-        DBAccessorBean a = new DBAccessorBean();
+        //DBAccessorBean a = new DBAccessorBean();
     }
 }

@@ -25,19 +25,40 @@ public class UserController implements Serializable {
     @EJB
     UserEntityFacade userFacade;
     
+    /**
+     * Uses the UserEntityFacade to return all user records.
+     */
     public List<UserEntity> getAll(){
         return userFacade.findAll();
     }
     
+    public UserEntity getById(int id){
+        return userFacade.find(id);
+    }
+    
+    /**
+     * Uses the UserEntityFacade to return the amount user records.
+     */
     public int count() {
         return userFacade.count();
     }
     
+    /**
+     * Uses the UserEntityFacade to delete specified user record.
+     * 
+     * @param u - Target user record to be deleted.
+     * @return - null
+     */
     public String delete(UserEntity u) {
         userFacade.remove(u);
         return null; //Error logging ?
     }
     
+    /**
+     * Uses the UserEntityFacade to insert a new  user record.
+     * 
+     * @return - An URL to be redirected to.
+     */
     public String add() {
         UserEntity u = new UserEntity();
         //u.setDisplayname(userBean.getDisplayName());
