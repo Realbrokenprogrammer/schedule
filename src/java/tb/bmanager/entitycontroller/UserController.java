@@ -8,7 +8,7 @@ package tb.bmanager.entitycontroller;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import tb.bmanager.entity.UserEntity;
 import tb.bmanager.entitymanager.UserEntityFacade;
@@ -19,7 +19,7 @@ import tb.bmanager.entitymanager.UserEntityFacade;
  */
 
 @Named(value="userController")
-@SessionScoped
+@ApplicationScoped
 public class UserController implements Serializable {
     
     @EJB

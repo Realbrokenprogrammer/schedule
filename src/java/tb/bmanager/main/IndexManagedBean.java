@@ -10,11 +10,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.annotation.ManagedBean;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
-import tb.bmanager.auth.RegisterActionBean;
+import javax.faces.bean.ViewScoped;
 import tb.bmanager.auth.RegisterActionBeanLocal;
 
 /**
@@ -22,7 +20,7 @@ import tb.bmanager.auth.RegisterActionBeanLocal;
  * @author oskarmendel
  */
 @Named(value = "indexManagedBean")
-@Dependent
+@ViewScoped
 @ManagedBean
 public class IndexManagedBean implements Serializable{
     
