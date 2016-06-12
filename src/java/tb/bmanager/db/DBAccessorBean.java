@@ -24,9 +24,11 @@ public class DBAccessorBean implements DBAccessorBeanLocal {
     protected Connection conn = null;
     protected Statement stmt = null;
     protected ResultSet rs = null;
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
     
+    /**
+     * Constructor initializing the connection to specified Database.
+     * When finished a connection should be established.
+     */
     public DBAccessorBean (){
         try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -90,22 +92,30 @@ public class DBAccessorBean implements DBAccessorBeanLocal {
         }
     }
     
-    public void preformStatement(){
-        
-    }
-    
+    /**
+     * Manual insert statement.
+     */
     private void insert(){
         
     }
     
+    /**
+     * Manual update statement.
+     */
     private void update(){
         
     }
     
+    /**
+     * Manual save statement.
+     */
     private void save(){
         
     }
     
+    /**
+     * Manual delete statement.
+     */
     private void delete(){
         
     }

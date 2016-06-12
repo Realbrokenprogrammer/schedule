@@ -7,9 +7,7 @@ package tb.bmanager.auth;
 
 import javax.ejb.Stateless;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import tb.bmanager.db.DBAccessorBean;
 
@@ -24,9 +22,9 @@ public class RegisterActionBean implements RegisterActionBeanLocal {
     Statement stmt = null;
     ResultSet rs = null;
     
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-    
+    /**
+     * Gets the connection used for manual queries to the DB. 
+     */
     public void getConnection(){
         //DBAccessorBean a = new DBAccessorBean();
     }

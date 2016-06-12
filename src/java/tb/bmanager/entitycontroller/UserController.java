@@ -32,6 +32,11 @@ public class UserController implements Serializable {
         return userFacade.findAll();
     }
     
+    /**
+     * Uses the UserEntityFacade to return the user with specified id.
+     * @param id - id of target user.
+     * @return the UserEntity of found user.
+     */
     public UserEntity getById(int id){
         return userFacade.find(id);
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tb.bmanager.entity;
 
 import java.io.Serializable;
@@ -112,99 +107,195 @@ public class UserEntity implements Serializable {
         this.follows = follows;
         this.projects = projects;
     }
-
+    
+    /**
+     * 
+     * @return users id.
+     */
     public Integer getId() {
         return id;
     }
-
+    
+    /**
+     * 
+     * @param id - unique id for the user.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
-
+    
+    /**
+     * 
+     * @return users username. 
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * 
+     * @param username - username used for logging in to the application.
+     */
     public void setUsername(String username) {
         this.username = username;
     }
-
+    
+    /**
+     * 
+     * @return users password.
+     */
     public String getPassword() {
         return password;
     }
-
+    
+    /**
+     * 
+     * @param password - users password.
+     */
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
+    /**
+     * 
+     * @return users display name.
+     */
     public String getDisplayname() {
         return displayname;
     }
-
+    
+    /**
+     * 
+     * @param displayname - users display name used as a public name.
+     */
     public void setDisplayname(String displayname) {
         this.displayname = displayname;
     }
 
+    /**
+     * 
+     * @return users specified web site URL.
+     */
     public String getWebsiteurl() {
         return websiteurl;
     }
-
+    
+    /**
+     * 
+     * @param websiteurl - target users web site URL.
+     */
     public void setWebsiteurl(String websiteurl) {
         this.websiteurl = websiteurl;
     }
-
+    
+    /**
+     * 
+     * @return users specified email address.
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * 
+     * @param email - users email address.
+     */
     public void setEmail(String email) {
         this.email = email;
     }
-
+    
+    /**
+     * 
+     * @return users set biography.
+     */
     public String getBio() {
         return bio;
     }
 
+    /**
+     * 
+     * @param bio - user biography.
+     */
     public void setBio(String bio) {
         this.bio = bio;
     }
 
+    /**
+     * 
+     * @return the amount of followers the user has.
+     */
     public int getFollowers() {
         return followers;
     }
 
+    /**
+     * 
+     * @param followers - users followers.
+     */
     public void setFollowers(int followers) {
         this.followers = followers;
     }
-
+    
+    /**
+     * 
+     * @return the number of users the user follows.
+     */
     public int getFollows() {
         return follows;
     }
 
+    /**
+     * 
+     * @param follows - the amount of users the user follows.
+     */
     public void setFollows(int follows) {
         this.follows = follows;
     }
 
+    /**
+     * 
+     * @return the amount of projects the user is apart of.
+     */
     public int getProjects() {
         return projects;
     }
 
+    /**
+     * 
+     * @param projects - the amount of projects the user is a part of.
+     */
     public void setProjects(int projects) {
         this.projects = projects;
     }
 
+    /**
+     * 
+     * @return the date the user joined.
+     */
     public Date getJoindate() {
         return joindate;
     }
 
+    /**
+     * 
+     * @param joindate - the date the user joined.
+     */
     public void setJoindate(Date joindate) {
         this.joindate = joindate;
     }
 
+    /**
+     * 
+     * @return URL of target users profile image.
+     */
     public String getProfileimg() {
         return profileimg;
     }
 
+    /**
+     * 
+     * @param profileimg - URL of target users profile image.
+     */
     public void setProfileimg(String profileimg) {
         this.profileimg = profileimg;
     }
