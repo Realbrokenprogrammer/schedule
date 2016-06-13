@@ -14,9 +14,9 @@
     
     <hr></hr>
     
-    <h1>Total # of users: #{userController.count()}</h1>
+    <h1>Total # of users: #{userManagedBean.count()}</h1>
     
-    <h:dataTable value="#{userController.getAll()}" var="user">
+    <h:dataTable value="#{userManagedBean.getAll()}" var="user">
         <h:column>
             <f:facet name="header">ID</f:facet>
             #{user.id}
@@ -38,7 +38,7 @@
     <hr></hr>
     
     <ul>
-        <ui:repeat value="#{userController.getAll()}" var="user">
+        <ui:repeat value="#{userManagedBean.getAll()}" var="user">
             <li>
                 <h:link value="View details of #{user.displayname}" outcome="user">
                     <f:param name="id" value="#{user.id}" />
