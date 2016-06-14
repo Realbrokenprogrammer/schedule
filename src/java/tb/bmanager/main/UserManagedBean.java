@@ -24,22 +24,21 @@ import tb.bmanager.entitymanager.UserEntityFacade;
  */
 @Named(value = "userManagedBean")
 @RequestScoped
-@ManagedBean
 public class UserManagedBean {
     
     @EJB
     private UserEntityFacade userFacade;
     
-    String username;
-    String password;
-    String displayname;
-    String email;
-    String bio;
-    String websiteurl;
-    int followers;
-    int follows;
-    int projects;
-    UserEntity user;
+    private String username;
+    private String password;
+    private String displayName;
+    private String email;
+    private String bio;
+    private String websiteurl;
+    private int followers;
+    private int follows;
+    private int projects;
+    private UserEntity user;
     
     private int userId;
     
@@ -65,7 +64,6 @@ public class UserManagedBean {
      * @return 
      */
     public List<UserEntity> getAll(){
-        System.out.println("getall");
         return userFacade.findAll();
     }
     
@@ -127,5 +125,41 @@ public class UserManagedBean {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+    
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    public String getUsername(){
+        return this.username;
+    }
+    
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayname) {
+        this.displayName = displayname;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public void agg(){
+        System.out.println("worked");
     }
 }

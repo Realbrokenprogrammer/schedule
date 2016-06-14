@@ -21,12 +21,11 @@ import tb.bmanager.auth.RegisterActionBeanLocal;
  */
 @Named(value = "indexManagedBean")
 @ViewScoped
-@ManagedBean
 public class IndexManagedBean implements Serializable{
     
     //Injecting EJBs
-    @EJB 
-    private RegisterActionBeanLocal register;
+    //@EJB 
+    //private RegisterActionBeanLocal register;
     
     Connection conn = null;
     Statement stmt = null;

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Registration page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <f:view>
+        <h:form id="registerForm">
+            <table>
+                <tr>
+                    <td><h:outputText value="Enter Your First Name:" /></td>
+                    <td><h:inputText id="fname" value="#{userManagedBean.username}"
+                            required="true" requiredMessage="Please enter your first name" /></td>
+                    <td><h:message for="fname" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Enter Your Display Name:" /></td>
+                    <td><h:inputText id="dname" value="#{userManagedBean.displayName}"
+                            required="true" requiredMessage="Please enter your display name" /></td>
+                    <td><h:message for="fname" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Enter Your email ID:" /></td>
+                    <td><h:inputText id="email" value="#{userManagedBean.email}"
+                            required="true" requiredMessage="Please enter your email id" /></td>
+                    <td><h:message for="email" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Enter Password :" /></td>
+                    <td><h:inputSecret id="psw" value="#{userManagedBean.password}"
+                            required="true" requiredMessage="Please enter your password" /></td>
+                    <td><h:message for="psw" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td />
+                    <td><h:commandButton value="Register" action="#{userManagedBean.agg()}" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputLink value="index.xhtml">Home</h:outputLink></td>
+                </tr>
+            </table>
+        </h:form>
+    </f:view>
+    </body>
+</html>
