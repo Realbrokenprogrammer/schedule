@@ -9,11 +9,8 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import javax.annotation.ManagedBean;
-import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
-import tb.bmanager.auth.RegisterActionBeanLocal;
 
 /**
  *

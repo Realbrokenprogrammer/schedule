@@ -11,6 +11,11 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    
+    <f:metadata>
+        <f:viewAction action="#{registerManagedBean.init()}" />
+    </f:metadata>
+    
     <h:head>
         <title>Registration page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -22,35 +27,35 @@ and open the template in the editor.
             <table>
                 <tr>
                     <td><h:outputText value="Enter Your First Name:" /></td>
-                    <td><p:inputText id="fname" value="#{userManagedBean.username}"
+                    <td><p:inputText id="fname" value="#{registerManagedBean.username}"
                             required="true" requiredMessage="Please enter your first name" /></td>
                     <td><h:message for="fname" style="color:red" /></td>
                 </tr>
                 <tr>
                     <td><h:outputText value="Enter Your Display Name:" /></td>
-                    <td><p:inputText id="dname" value="#{userManagedBean.displayName}"
+                    <td><p:inputText id="dname" value="#{registerManagedBean.displayName}"
                             required="true" requiredMessage="Please enter your display name" /></td>
                     <td><h:message for="fname" style="color:red" /></td>
                 </tr>
                 <tr>
                     <td><h:outputText value="Enter Your email ID:" /></td>
-                    <td><p:inputText id="email" value="#{userManagedBean.email}"
+                    <td><p:inputText id="email" value="#{registerManagedBean.email}"
                             required="true" requiredMessage="Please enter your email id" /></td>
                     <td><h:message for="email" style="color:red" /></td>
                 </tr>
                 <tr>
                     <td><h:outputText value="Enter Password :" /></td>
-                    <td><p:password id="psw" value="#{userManagedBean.password}" label="Password Field" match="psw2" feedback="true" inline="true" required="true" /></td>
+                    <td><p:password id="psw" value="#{registerManagedBean.password}" label="Password Field" match="psw2" feedback="true" inline="true" required="true" /></td>
                     <td><h:message for="psw" style="color:red" /></td>
                 </tr>
                 <tr>
                     <td><h:outputText value="Confirm Password :" /></td>
-                    <td><p:password id="psw2" value="#{userManagedBean.password}" label="Password 2" required="true" /></td>
+                    <td><p:password id="psw2" value="#{registerManagedBean.password}" label="Password 2" required="true" /></td>
                     <td><h:message for="psw" style="color:red" /></td>
                 </tr>
                 <tr>
                     <td />
-                    <td><p:commandButton value="Register" id="nonAjax" actionListener="#{userManagedBean.agg()}" ajax="false" /></td>
+                    <td><p:commandButton value="Register" id="nonAjax" actionListener="#{registerManagedBean.verifyRegistration()}" ajax="false" /></td>
                 </tr>
                 <tr>
                     <td><h:outputLink value="index.xhtml">Home</h:outputLink></td>

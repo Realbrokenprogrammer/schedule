@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import tb.bmanager.db.DBAccessorBean;
+import tb.bmanager.entity.UserEntity;
 
 /**
  *
@@ -27,5 +28,21 @@ public class RegisterActionBean implements RegisterActionBeanLocal {
      */
     public void getConnection(){
         //DBAccessorBean a = new DBAccessorBean();
+    }
+    
+    /**
+     * Uses the UserEntityFacade to insert a new  user record.
+     * 
+     * @return - An URL to be redirected to.
+     */
+    public String add() {
+        UserEntity u = new UserEntity();
+        //u.setDisplayname(userBean.getDisplayName());
+        //u.setUsername(userBean.getUsername());
+        //u.setPassword(userBean.getPassword());
+        
+        //userFacade.create(u);
+        
+        return "index";//Url ?
     }
 }
