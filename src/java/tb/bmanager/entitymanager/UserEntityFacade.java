@@ -39,10 +39,38 @@ public class UserEntityFacade extends AbstractFacade<UserEntity> {
         List<UserEntity> users = q.getResultList();
         
         if (users.isEmpty() || users == null) {
-            System.out.println("USER IS NULL");
+            System.out.println("USER NOT FOUND");
             return null;
         } else {
             System.out.println("USER WAS FOUND" + users.get(0).getUsername());
+            return users.get(0);
+        }
+    }
+    
+    public UserEntity findByDisplayName(String DisplayName) {
+        Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.displayname = :displayname");
+        q.setParameter("displayname", DisplayName);
+        List<UserEntity> users = q.getResultList();
+        
+        if (users.isEmpty() || users == null) {
+            System.out.println("USER NOT FOUND");
+            return null;
+        } else {
+            System.out.println("USER WAS FOUND" + users.get(0).getDisplayname());
+            return users.get(0);
+        }
+    }
+    
+    public UserEntity findByEmail(String Email) {
+        Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.email = :email");
+        q.setParameter("email", Email);
+        List<UserEntity> users = q.getResultList();
+        
+        if (users.isEmpty() || users == null) {
+            System.out.println("USER NOT FOUND");
+            return null;
+        } else {
+            System.out.println("USER WAS FOUND" + users.get(0).getEmail());
             return users.get(0);
         }
     }

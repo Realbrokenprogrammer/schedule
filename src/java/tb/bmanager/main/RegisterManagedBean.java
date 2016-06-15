@@ -45,7 +45,7 @@ public class RegisterManagedBean {
         user = new UserEntity();
 
         if (user == null) {
-            String message = "Bad request. Unknown user.";
+            String message = "Error couldn't initialize user.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
         }
@@ -57,15 +57,25 @@ public class RegisterManagedBean {
             String message = "Your specified username is too long.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
-        }
-        
-        if (userFacade.findByUsername(username) != null){
-            System.out.println("User already exists.");
+        }else if (userFacade.findByUsername(username) != null){
+            String message = "Username already exists.";
+            FacesContext.getCurrentInstance().addMessage(null, 
+                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
         }
         
         //Check if displayName is within length & if its taken or not
+        if (userFacade.findByDisplayName(displayName) != null) {
+            String message = "Display name already exists.";
+            FacesContext.getCurrentInstance().addMessage(null, 
+                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+        }
         
         //Check if email is valid and if its taken
+        if (userFacade.findByEmail(email) != null) {
+            String message = "An account with specified email already exists.";
+            FacesContext.getCurrentInstance().addMessage(null, 
+                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+        }
         
         //Check if password is strong enough
     }
