@@ -9,8 +9,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
- *
+ * AbstractFacade acts as a universal entity manger that can be extended to
+ * perform standard queries for a specific table like find by id or find all.
+ * 
  * @author oskarmendel
+ * @version 0.00.00
+ * %name AbstractFacade.java
+ * %date 15:29:40 PM, Jun 15, 2016
  */
 public abstract class AbstractFacade<T> {
 

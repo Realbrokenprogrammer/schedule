@@ -15,8 +15,12 @@ import tb.bmanager.entity.UserEntity;
 import tb.bmanager.entitymanager.UserEntityFacade;
 
 /**
- *
+ * Controller for the user view.
+ * 
  * @author oskarmendel
+ * @version 0.00.00
+ * %name UserManagedBean.java
+ * %date 15:35:10 PM, Jun 15, 2016
  */
 @Named(value = "userManagedBean")
 @RequestScoped

@@ -15,8 +15,12 @@ import tb.bmanager.entity.UserEntity;
 import tb.bmanager.entitymanager.UserEntityFacade;
 
 /**
- *
+ * Controller for the register view.
+ * 
  * @author oskarmendel
+ * @version 0.00.00
+ * %name RegisterManagedBean.java
+ * %date 15:34:37 PM, Jun 15, 2016
  */
 @Named(value = "registerManagedBean")
 @RequestScoped

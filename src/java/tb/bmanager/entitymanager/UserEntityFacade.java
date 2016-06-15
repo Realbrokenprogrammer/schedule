@@ -13,8 +13,14 @@ import javax.persistence.Query;
 import tb.bmanager.entity.UserEntity;
 
 /**
- *
+ * UserEntityFacade extends AbstractFacade and acts as an entity manager for 
+ * the users table and can be used to perform queries to the users table and get
+ * the results returned as UserEntity objects.
+ * 
  * @author oskarmendel
+ * @version 0.00.00
+ * %name UserEntityFacade.java
+ * %date 15:32:45 PM, Jun 15, 2016
  * read:
  *  http://stackoverflow.com/questions/2002993/jpa-getsingleresult-or-null
  */

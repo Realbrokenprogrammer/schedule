@@ -13,8 +13,12 @@ import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 
 /**
- *
+ * Controller for the index view.
+ * 
  * @author oskarmendel
+ * @version 0.00.00
+ * %name IndexManagedBean.java
+ * %date 15:33:43 PM, Jun 15, 2016
  */
 @Named(value = "indexManagedBean")
 @ViewScoped

@@ -14,8 +14,13 @@ import java.sql.Statement;
 import javax.ejb.Stateless;
 
 /**
- *
+ * Database wrapper for manually performing queries to the database 
+ * through JDBC.
+ * 
  * @author oskarmendel
+ * @version 0.00.00
+ * %name DBAccessorBean.java
+ * %date 15:24:36 PM, Jun 15, 2016
  */
 @Stateless
 public class DBAccessorBean implements DBAccessorBeanLocal {

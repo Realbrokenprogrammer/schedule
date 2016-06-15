@@ -19,8 +19,12 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * UserEntity acts like a model for the user table in the database.
+ * 
  * @author oskarmendel
+ * @version 0.00.00
+ * %name UserEntity.java
+ * %date 15:27:26 PM, Jun 15, 2016
  */
 @Entity
 @Table(name = "USER")

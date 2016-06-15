@@ -13,8 +13,13 @@ import tb.bmanager.db.DBAccessorBean;
 import tb.bmanager.entity.UserEntity;
 
 /**
- *
+ * Preforms the registering of users, securing user password then pushing to 
+ * database.
+ * 
  * @author oskarmendel
+ * @version 0.00.00
+ * %name RegisterActionBean.java
+ * %date 15:19:30 PM, Jun 15, 2016
  */
 @Stateless
 public class RegisterActionBean implements RegisterActionBeanLocal {
