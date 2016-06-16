@@ -33,7 +33,7 @@ public class IndexManagedBean implements Serializable{
     ResultSet rs = null;
     
     /**
-     * Creates a new instance of IndexManagedBean
+     * Creates a new instance of IndexManagedBean.
      */
     public IndexManagedBean() {
         

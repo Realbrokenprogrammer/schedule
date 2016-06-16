@@ -95,18 +95,34 @@ public class UserManagedBean {
         return null; //Error logging ?
     }
     
+    /**
+     * 
+     * @param u - user object.
+     */
     public void setUser(UserEntity u) {
         this.user = u;
     }
     
+    /**
+     * 
+     * @return the user object.
+     */
     public UserEntity getUser(){
         return this.user;
     }
     
+    /**
+     * 
+     * @return the user id of the local user object.
+     */
      public int getUserId() {
         return userId;
     }
 
+     /**
+      * 
+      * @param userId - the user id of the local user object.
+      */
     public void setUserId(int userId) {
         this.userId = userId;
     }

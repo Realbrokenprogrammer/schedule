@@ -39,6 +39,12 @@ public class UserEntityFacade extends AbstractFacade<UserEntity> {
         super(UserEntity.class);
     }
     
+    /**
+     * Finds a record by searching for a username.
+     * @param Username - target username to find in the users table.
+     * @return UserEntity with data from the found user with specified username.
+     * returns null if no user was found.
+     */
     public UserEntity findByUsername(String Username) {
         Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.username = :username");
         q.setParameter("username", Username);
@@ -53,6 +59,12 @@ public class UserEntityFacade extends AbstractFacade<UserEntity> {
         }
     }
     
+    /**
+     * Finds a record by searching for a display name.
+     * @param DisplayName - target display name to find in the users table.
+     * @return UserEntity with data from the found user with specified username.
+     * returns null if no user was found.
+     */
     public UserEntity findByDisplayName(String DisplayName) {
         Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.displayname = :displayname");
         q.setParameter("displayname", DisplayName);
@@ -67,6 +79,12 @@ public class UserEntityFacade extends AbstractFacade<UserEntity> {
         }
     }
     
+    /**
+     * Finds a record by searching for a email.
+     * @param Email - target email to find in the users table.
+     * @return UserEntity with data from the found user with specified username.
+     * returns null if no user was found.
+     */
     public UserEntity findByEmail(String Email) {
         Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.email = :email");
         q.setParameter("email", Email);
