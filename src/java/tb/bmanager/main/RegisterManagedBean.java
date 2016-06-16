@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import tb.bmanager.auth.RegisterActionBeanLocal;
 import tb.bmanager.entity.UserEntity;
 import tb.bmanager.entitymanager.UserEntityFacade;
+import tb.bmanager.util.PasswordEncryptor;
 import tb.bmanager.util.validation.UserValidation;
 
 /**
@@ -107,6 +108,11 @@ public class RegisterManagedBean {
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
         }
+        
+        byte[] test = PasswordEncryptor.getInstance().generateSalt();
+        System.out.println(new String(test));
+        
+        System.out.println(new String(PasswordEncryptor.getInstance().hash(password.toCharArray(), test)));
     }
     
     /**
