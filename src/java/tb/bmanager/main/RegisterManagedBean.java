@@ -66,11 +66,11 @@ public class RegisterManagedBean {
      * Verify the specified data the user registering has provided.
      */
     public void verifyRegistration(){
-        //Check username is within length & if its taken or not
         userValidation = UserValidation.getInstance();
         
+        //Check username is within length & if its taken or not
         if(!userValidation.validateUsername(username)) {
-            String message = "Your specified username is too long or uses illegal characters.";
+            String message = "Your specified username is too long or contains illegal characters.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
         }else if (userFacade.findByUsername(username) != null){
@@ -80,20 +80,33 @@ public class RegisterManagedBean {
         }
         
         //Check if displayName is within length & if its taken or not
-        if (userFacade.findByDisplayName(displayName) != null) {
+        if(!userValidation.validateDisplayname(displayName)) {
+            String message = "Your specified display name is too long or contains illegal characters.";
+            FacesContext.getCurrentInstance().addMessage(null, 
+                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+        }else if (userFacade.findByDisplayName(displayName) != null) {
             String message = "Display name already exists.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
         }
         
         //Check if email is valid and if its taken
-        if (userFacade.findByEmail(email) != null) {
+        if(!userValidation.validateEmail(email)) {
+            String message = "Your specified email is not a valid email address.";
+            FacesContext.getCurrentInstance().addMessage(null, 
+                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+        }else if (userFacade.findByEmail(email) != null) {
             String message = "An account with specified email already exists.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
         }
         
         //Check if password is strong enough
+        if(!userValidation.validatePassword(password)) {
+            String message = "Your password needs to be longer than 4 characters.";
+            FacesContext.getCurrentInstance().addMessage(null, 
+                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+        }
     }
     
     /**

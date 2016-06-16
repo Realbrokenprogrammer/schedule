@@ -35,11 +35,20 @@ public class UserValidation {
     private Matcher matcher;
     
     private static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,20}$";
+    private static final String DISPLAYNAME_PATTERN = "^[a-z0-9_-]{3,20}$";
+    private static final String EMAIL_PATTERN = 
+		"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    private static final String PASSWORD_PATTERN = "^.{4,30}$";
     
     protected UserValidation() {
         
     }
     
+    /**
+     * 
+     * @return instance of the UserValidation singleton.
+     */
     public static UserValidation getInstance() {
         if (instance == null) {
             instance = new UserValidation();
@@ -47,9 +56,56 @@ public class UserValidation {
         return instance;
     }
     
+    /**
+     * 
+     * @param username - username to validate.
+     * @return true or false depending if the length and formatting of the 
+     * username is allowed or not.
+     */
     public boolean validateUsername(String username) {
+        //TODO check for illegal words or phrases
         pattern = Pattern.compile(USERNAME_PATTERN);
         matcher = pattern.matcher(username);
+        if (matcher.matches()) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 
+     * @param displayname - display name to validate.
+     * @return true or false depending if the length and formatting of the
+     * display name is considered valid or not.
+     */
+    public boolean validateDisplayname(String displayname) {
+        //TODO check for illegal words or phrases
+        pattern = Pattern.compile(DISPLAYNAME_PATTERN);
+        matcher = pattern.matcher(displayname);
+        if (matcher.matches()) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 
+     * @param email - email to validate.
+     * @return true or false depending if the formatting of the
+     * email is considered valid or not.
+     */
+    public boolean validateEmail(String email) {
+        pattern = Pattern.compile(EMAIL_PATTERN);
+        matcher = pattern.matcher(email);
+        if (matcher.matches()) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean validatePassword(String password) {
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
         if (matcher.matches()) {
             return true;
         }
