@@ -23,6 +23,8 @@ import tb.bmanager.entity.UserEntity;
  * %date 15:32:45 PM, Jun 15, 2016
  * read:
  *  http://stackoverflow.com/questions/2002993/jpa-getsingleresult-or-null
+ * ask:
+ *  Are the findBy methods good?
  */
 @Stateless
 public class UserEntityFacade extends AbstractFacade<UserEntity> {

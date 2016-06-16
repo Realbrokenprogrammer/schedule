@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import tb.bmanager.auth.RegisterActionBeanLocal;
 import tb.bmanager.entity.UserEntity;
 import tb.bmanager.entitymanager.UserEntityFacade;
+import tb.bmanager.util.validation.UserValidation;
 
 /**
  * Controller for the register view.
@@ -39,6 +40,8 @@ public class RegisterManagedBean {
     private String displayName;
     private String email;
     
+    private UserValidation userValidation;
+    
     /**
      * Creates a new instance of RegisterManagedBean.
      */
@@ -64,8 +67,10 @@ public class RegisterManagedBean {
      */
     public void verifyRegistration(){
         //Check username is within length & if its taken or not
-        if(username.length() > 255) {
-            String message = "Your specified username is too long.";
+        userValidation = UserValidation.getInstance();
+        
+        if(!userValidation.validateUsername(username)) {
+            String message = "Your specified username is too long or uses illegal characters.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
         }else if (userFacade.findByUsername(username) != null){
