@@ -9,7 +9,6 @@ import javax.ejb.Stateless;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import tb.bmanager.db.DBAccessorBean;
 import tb.bmanager.entity.UserEntity;
 
 /**
