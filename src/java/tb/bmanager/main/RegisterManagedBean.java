@@ -13,7 +13,6 @@ import javax.faces.context.FacesContext;
 import tb.bmanager.auth.RegisterActionBeanLocal;
 import tb.bmanager.entity.UserEntity;
 import tb.bmanager.entitymanager.UserEntityFacade;
-import tb.bmanager.util.PasswordEncryptor;
 import tb.bmanager.util.validation.UserValidation;
 
 /**
@@ -65,6 +64,7 @@ public class RegisterManagedBean {
     
     /**
      * Verify the specified data the user registering has provided.
+     * @return 
      */
     public void verifyRegistration(){
         userValidation = UserValidation.getInstance();
@@ -109,10 +109,22 @@ public class RegisterManagedBean {
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
         }
         
-        byte[] test = PasswordEncryptor.getInstance().generateSalt();
-        System.out.println(new String(test));
+        buildUser();
+        register.preformRegistration(user);
+    }
+    
+    /**
+     * Builds the local user object before performing the registration.
+     */
+    private void buildUser() {
+        if (user == null) {
+            user = new UserEntity();
+        }
         
-        System.out.println(new String(PasswordEncryptor.getInstance().hash(password.toCharArray(), test)));
+        user.setUsername(username);
+        user.setDisplayname(displayName);
+        user.setEmail(email);
+        user.setPassword(password);
     }
     
     /**

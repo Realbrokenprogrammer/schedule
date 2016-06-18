@@ -6,6 +6,7 @@
 package tb.bmanager.auth;
 
 import javax.ejb.Local;
+import tb.bmanager.entity.UserEntity;
 
 /**
  * Allows the business methods of RegisterActionBean to be publicly used locally 
@@ -18,5 +19,8 @@ import javax.ejb.Local;
  */
 @Local
 public interface RegisterActionBeanLocal {
+    
     public void getConnection();
+
+    public void preformRegistration(UserEntity u);
 }

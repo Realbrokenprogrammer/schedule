@@ -9,7 +9,11 @@ import javax.ejb.Stateless;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
+import javax.ejb.EJB;
 import tb.bmanager.entity.UserEntity;
+import tb.bmanager.entitymanager.UserEntityFacade;
+import tb.bmanager.util.BCrypt;
 
 /**
  * Preforms the registering of users, securing user password then pushing to 
@@ -23,6 +27,9 @@ import tb.bmanager.entity.UserEntity;
 @Stateless
 public class RegisterActionBean implements RegisterActionBeanLocal {
     
+    @EJB
+    private UserEntityFacade userFacade;
+    
     Connection conn = null;
     Statement stmt = null;
     ResultSet rs = null;
@@ -35,18 +42,21 @@ public class RegisterActionBean implements RegisterActionBeanLocal {
     }
     
     /**
-     * Uses the UserEntityFacade to insert a new  user record.
+     * Preforms the registration of a user filling in some empty information before
+     * pushing the UserEntity to the database.
      * 
-     * @return - An URL to be redirected to.
+     * @param u - UserEntity to push to the database.
      */
-    public String add() {
-        UserEntity u = new UserEntity();
-        //u.setDisplayname(userBean.getDisplayName());
-        //u.setUsername(userBean.getUsername());
-        //u.setPassword(userBean.getPassword());
+    public void preformRegistration(UserEntity u) {
+        u.setFollowers(0);
+        u.setFollows(0);
+        u.setProjects(0);
+        u.setJoindate(new Date());
         
-        //userFacade.create(u);
+        //Hash the password
+        u.setPassword(BCrypt.hashpw(u.getPassword(), BCrypt.gensalt()));
         
-        return "index";//Url ?
+        //Post the record.
+        userFacade.create(u);
     }
 }
