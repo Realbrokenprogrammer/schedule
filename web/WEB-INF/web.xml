@@ -4,6 +4,14 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    <filter>
+        <filter-name>UserSessionFilter</filter-name>
+        <filter-class>tb.bmanager.auth.filter.UserSessionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserSessionFilter</filter-name>
+        <url-pattern>/b/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -14,7 +22,7 @@
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-      <servlet-name>Faces Servlet</servlet-name>
+        <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>

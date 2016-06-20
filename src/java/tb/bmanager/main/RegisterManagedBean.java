@@ -5,9 +5,11 @@
  */
 package tb.bmanager.main;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import tb.bmanager.auth.RegisterActionBeanLocal;
@@ -24,8 +26,8 @@ import tb.bmanager.util.validation.UserValidation;
  * %date 15:34:37 PM, Jun 15, 2016
  */
 @Named(value = "registerManagedBean")
-@RequestScoped
-public class RegisterManagedBean {
+@SessionScoped
+public class RegisterManagedBean  implements Serializable{
 
     //Injecting EJBs
     @EJB 

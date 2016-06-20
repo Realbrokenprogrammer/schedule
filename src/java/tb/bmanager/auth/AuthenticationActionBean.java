@@ -19,6 +19,8 @@ package tb.bmanager.auth;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import tb.bmanager.entity.UserEntity;
 import tb.bmanager.entitymanager.UserEntityFacade;
 import tb.bmanager.util.BCrypt;
@@ -45,6 +47,7 @@ public class AuthenticationActionBean implements AuthenticationActionBeanLocal {
      * @param password
      */
     public void preformAuthentication(String username, String password) {
+        FacesContext context = FacesContext.getCurrentInstance();
         System.out.println("Made it to perform Auth.");
         
         user = userFacade.findByUsername(username);
@@ -56,9 +59,12 @@ public class AuthenticationActionBean implements AuthenticationActionBeanLocal {
         if (user.getUsername().equals(username)) {
             System.out.println("Username matches");
             if(BCrypt.checkpw(password, user.getPassword())) {
+                context.getExternalContext().getSessionMap().put("USER", user);
                 System.out.println("Password matches");
             } else {
-                System.out.println("Password doesnt match!!");
+                String message = "The user / password combination is wrong.";
+            FacesContext.getCurrentInstance().addMessage(null, 
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
             }
         }
     }

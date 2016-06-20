@@ -17,6 +17,7 @@
  */
 package tb.bmanager.util.validation;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,7 +29,7 @@ import java.util.regex.Pattern;
  * %name UserValidation.java
  * %date 03:08:12 AM, Jun 16, 2016
  */
-public class UserValidation {
+public class UserValidation implements Serializable{
     
     private static UserValidation instance = null;
     private Pattern pattern;
