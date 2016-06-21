@@ -17,11 +17,15 @@
  */
 package tb.bmanager.auth;
 
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import tb.bmanager.entity.LoginAttemptsEntity;
 import tb.bmanager.entity.UserEntity;
+import tb.bmanager.entitymanager.LoginAttemptsEntityFacade;
 import tb.bmanager.entitymanager.UserEntityFacade;
 import tb.bmanager.util.BCrypt;
 
@@ -39,7 +43,11 @@ public class AuthenticationActionBean implements AuthenticationActionBeanLocal {
     @EJB
     private UserEntityFacade userFacade;
     
+    @EJB
+    private LoginAttemptsEntityFacade loginAttemptsFacade;
+    
     UserEntity user;
+    LoginAttemptsEntity loginAttempt;
     
     /**
      * 
@@ -62,10 +70,47 @@ public class AuthenticationActionBean implements AuthenticationActionBeanLocal {
                 context.getExternalContext().getSessionMap().put("USER", user);
                 System.out.println("Password matches");
             } else {
-                String message = "The user / password combination is wrong.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
-            }
+                addLoginAttempt();
+                
+                String message = "The user / password combination is wrong. ";
+                FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+                }
         }
+    }
+    
+    public void preformLogout() {
+        
+    }
+    
+    /**
+     * 
+     */
+    public void addLoginAttempt() {
+        //Store a failed login attempt in the database.
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequest();
+
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+
+        loginAttempt = new LoginAttemptsEntity();
+        loginAttempt.setAddress(ipAddress);
+        loginAttempt.setDatetime(new Date());
+
+        loginAttemptsFacade.create(loginAttempt);
+    }
+    
+    public int getLoginAttempts() {
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequest();
+
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+        return loginAttemptsFacade.getLoginAttempts(ipAddress);
     }
 }

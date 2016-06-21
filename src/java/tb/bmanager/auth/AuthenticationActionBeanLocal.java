@@ -33,4 +33,7 @@ public interface AuthenticationActionBeanLocal {
 
     public void preformAuthentication(String username, String password);
     
+    public void preformLogout();
+    
+    public int getLoginAttempts();
 }

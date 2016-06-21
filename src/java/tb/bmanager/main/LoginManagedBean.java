@@ -81,6 +81,10 @@ public class LoginManagedBean implements Serializable{
         login.preformAuthentication(username, password);
     }
     
+    public int failedLogins() {
+        return login.getLoginAttempts();
+    }
+    
     /**
      * 
      * @param username - the username of the user.

@@ -34,8 +34,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Filters the request checking if there is a user session available.
+ * 
  * @author oskarmendel
+ * @version 0.00.00
+ * %name RegisterActionBean.java
+ * %date 14:14:20 PM, Jun 20, 2016
  */
 @WebFilter("/b/*")
 public class UserSessionFilter implements Filter {
