@@ -30,10 +30,26 @@ import javax.ejb.Local;
  */
 @Local
 public interface AuthenticationActionBeanLocal {
-
+    
+    /**
+     * Verifies the specified username and password against the database by
+     * using BCrypts checkpw(String plaintext, String hashed) method.
+     * 
+     * @param username - specified username.
+     * @param password - specified password.
+     */
     public void preformAuthentication(String username, String password);
     
+    /**
+     * 
+     */
     public void preformLogout();
     
+    /**
+     * Get the number of login attempts from clients IP address.
+     * 
+     * @return the amount of login attempts that has been made from the clients
+     * current IP address.
+     */
     public int getLoginAttempts();
 }

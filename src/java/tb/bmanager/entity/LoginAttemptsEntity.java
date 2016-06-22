@@ -35,8 +35,12 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * LoginAttemptsEntity acts like a model for the LoginAttempts table in the database.
+ * 
  * @author oskarmendel
+ * @version 0.00.00
+ * %name LoginAttemptsEntity.java
+ * %date 17:44:26 PM, Jun 21, 2016
  */
 @Entity
 @Table(name = "LOGINATTEMPTS")
@@ -62,7 +66,7 @@ public class LoginAttemptsEntity implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "datetime")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date datetime;
 
     public LoginAttemptsEntity() {

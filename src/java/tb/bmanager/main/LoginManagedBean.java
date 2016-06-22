@@ -57,30 +57,46 @@ public class LoginManagedBean implements Serializable{
     public LoginManagedBean() {
     }
     
+    /**
+     * Called when user clicks the login button in the view, validates input then
+     * sends input to AuthenticationActionBean to authenticate user.
+     */
     public void verifyLogin() {
         userValidation = UserValidation.getInstance();
         
-        //Check username is within length & if its taken or not
-        if(!userValidation.validateUsername(username)) {
-            String message = "Your specified username is too long or contains illegal characters.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
-        }else if (userFacade.findByUsername(username) == null){
-            String message = "User doesnt exists.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
-        }
+        if(failedLogins() < 5) {
         
-        //Check if password is strong enough
-        if(!userValidation.validatePassword(password)) {
-            String message = "Your password needs to be longer than 4 characters.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            //Check username is within length & if its taken or not
+            if(!userValidation.validateUsername(username)) {
+                String message = "Your specified username is too long or contains illegal characters.";
+                FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            }else if (userFacade.findByUsername(username) == null){
+                String message = "User doesnt exists.";
+                FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            }
+
+            //Check if password is strong enough
+            if(!userValidation.validatePassword(password)) {
+                String message = "Your password needs to be longer than 4 characters.";
+                FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            }
+
+            login.preformAuthentication(username, password);
+        } else {
+            String message = "Too many failed login attempts, try again later.";
+                FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
         }
-        
-        login.preformAuthentication(username, password);
     }
     
+    /**
+     * Amount of failed login attempts from this IP Address.
+     * 
+     * @return amount of failed login attempts from this IP address.
+     */
     public int failedLogins() {
         return login.getLoginAttempts();
     }

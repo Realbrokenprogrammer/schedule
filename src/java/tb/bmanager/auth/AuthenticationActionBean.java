@@ -19,7 +19,7 @@ package tb.bmanager.auth;
 
 import java.util.Date;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +37,7 @@ import tb.bmanager.util.BCrypt;
  * %name AuthenticationActionBean.java
  * %date 17:23:53 PM, Jun 18, 2016
  */
-@Stateless
+@Stateful
 public class AuthenticationActionBean implements AuthenticationActionBeanLocal {
 
     @EJB
@@ -50,9 +50,11 @@ public class AuthenticationActionBean implements AuthenticationActionBeanLocal {
     LoginAttemptsEntity loginAttempt;
     
     /**
+     * Verifies the specified username and password against the database by
+     * using BCrypts checkpw(String plaintext, String hashed) method.
      * 
-     * @param username
-     * @param password
+     * @param username - specified username.
+     * @param password - specified password.
      */
     public void preformAuthentication(String username, String password) {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -79,12 +81,16 @@ public class AuthenticationActionBean implements AuthenticationActionBeanLocal {
         }
     }
     
+    /**
+     * 
+     */
     public void preformLogout() {
         
     }
     
     /**
-     * 
+     * Creates a new entry in the LoginAttempts table by using the Entity of 
+     * LoginAttemptsEntity and JPA.
      */
     public void addLoginAttempt() {
         //Store a failed login attempt in the database.
@@ -103,6 +109,12 @@ public class AuthenticationActionBean implements AuthenticationActionBeanLocal {
         loginAttemptsFacade.create(loginAttempt);
     }
     
+    /**
+     * Get the number of login attempts from clients IP address.
+     * 
+     * @return the amount of login attempts that has been made from the clients
+     * current IP address.
+     */
     public int getLoginAttempts() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
                 .getExternalContext().getRequest();
