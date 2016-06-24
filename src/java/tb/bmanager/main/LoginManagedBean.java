@@ -62,6 +62,10 @@ public class LoginManagedBean implements Serializable{
      * sends input to AuthenticationActionBean to authenticate user.
      */
     public void verifyLogin() {
+        //Thread local variable to prevent multiple forms to submit different info.
+        String username = this.username;
+        String password = this.password;
+        
         userValidation = UserValidation.getInstance();
         
         if(failedLogins() < 5) {

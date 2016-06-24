@@ -35,8 +35,8 @@ public class UserValidation implements Serializable{
     private Pattern pattern;
     private Matcher matcher;
     
-    private static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,20}$";
-    private static final String DISPLAYNAME_PATTERN = "^[a-z0-9_-]{3,20}$";
+    private static final String USERNAME_PATTERN = "^[A-Za-z0-9_-]{3,20}$";
+    private static final String DISPLAYNAME_PATTERN = "^[A-Za-z0-9_-]{3,20}$";
     private static final String EMAIL_PATTERN = 
 		"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";

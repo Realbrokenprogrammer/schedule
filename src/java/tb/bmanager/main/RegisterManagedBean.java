@@ -78,9 +78,16 @@ public class RegisterManagedBean  implements Serializable{
     
     /**
      * Verify the specified data the user registering has provided.
-     * @return 
      */
     public void verifyRegistration(){
+        //Thread local variable to prevent multiple forms to submit different info.
+        String username = this.username;
+        String password = this.password;
+        String displayName = this.displayName;
+        String email = this.email;
+        
+        boolean gotError = false;
+        
         userValidation = UserValidation.getInstance();
         
         //Check username is within length & if its taken or not
@@ -88,10 +95,12 @@ public class RegisterManagedBean  implements Serializable{
             String message = "Your specified username is too long or contains illegal characters.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            gotError = true;
         }else if (userFacade.findByUsername(username) != null){
             String message = "Username already exists.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            gotError = true;
         }
         
         //Check if displayName is within length & if its taken or not
@@ -99,10 +108,12 @@ public class RegisterManagedBean  implements Serializable{
             String message = "Your specified display name is too long or contains illegal characters.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            gotError = true;
         }else if (userFacade.findByDisplayName(displayName) != null) {
             String message = "Display name already exists.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            gotError = true;
         }
         
         //Check if email is valid and if its taken
@@ -110,10 +121,12 @@ public class RegisterManagedBean  implements Serializable{
             String message = "Your specified email is not a valid email address.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            gotError = true;
         }else if (userFacade.findByEmail(email) != null) {
             String message = "An account with specified email already exists.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            gotError = true;
         }
         
         //Check if password is strong enough
@@ -121,24 +134,34 @@ public class RegisterManagedBean  implements Serializable{
             String message = "Your password needs to be longer than 4 characters.";
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            gotError = true;
         }
         
-        buildUser();
-        register.preformRegistration(user);
+        //Build user using local thread variables.
+        buildUser(username, password, displayName, email);
+        if (!gotError) {
+            register.preformRegistration(user);
+        }
     }
     
     /**
-     * Builds the local user object before performing the registration.
+     * Builds the local user object before performing the registration, 
+     * uses thread local variables to protect from multiple form requests.
+     * 
+     * @param usr - username to use when building the user object.
+     * @param pass - password to use when building the user object.
+     * @param displ - display name to use when building the user object.
+     * @param mail - email address to use when building the user object.
      */
-    private void buildUser() {
+    private void buildUser(String usr, String pass, String displ, String mail) {
         if (user == null) {
             user = new UserEntity();
         }
         
-        user.setUsername(username);
-        user.setDisplayname(displayName);
-        user.setEmail(email);
-        user.setPassword(password);
+        user.setUsername(usr);
+        user.setDisplayname(displ);
+        user.setEmail(mail);
+        user.setPassword(pass);
     }
     
     /**
