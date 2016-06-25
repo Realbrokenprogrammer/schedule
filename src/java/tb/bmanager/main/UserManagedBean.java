@@ -23,6 +23,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.omnifaces.util.Messages;
 import tb.bmanager.entity.UserEntity;
 import tb.bmanager.entitymanager.UserEntityFacade;
 
@@ -65,9 +66,7 @@ public class UserManagedBean {
         user = userFacade.find(userId);
 
         if (user == null) {
-            String message = "Bad request. Unknown user.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+            Messages.addGlobalError("Bad request, unknown user.");
         }
     }
     

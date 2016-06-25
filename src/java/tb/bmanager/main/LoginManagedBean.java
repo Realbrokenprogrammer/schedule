@@ -24,6 +24,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.omnifaces.util.Messages;
 import tb.bmanager.auth.AuthenticationActionBeanLocal;
 import tb.bmanager.entitymanager.UserEntityFacade;
 import tb.bmanager.util.validation.UserValidation;
@@ -72,27 +73,19 @@ public class LoginManagedBean implements Serializable{
         
             //Check username is within length & if its taken or not
             if(!userValidation.validateUsername(username)) {
-                String message = "Your specified username is too long or contains illegal characters.";
-                FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+                Messages.addGlobalError("Your specified username is too long or contains illegal characters.");
             }else if (userFacade.findByUsername(username) == null){
-                String message = "User doesnt exists.";
-                FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+                Messages.addGlobalError("User does not exist.");
             }
 
             //Check if password is strong enough
             if(!userValidation.validatePassword(password)) {
-                String message = "Your password needs to be longer than 4 characters.";
-                FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+                Messages.addGlobalError("Your password needs to be longer than 4 characters.");
             }
 
             login.preformAuthentication(username, password);
         } else {
-            String message = "Too many failed login attempts, try again later.";
-                FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+            Messages.addGlobalError("Too many failed login attempts, try again later.");
         }
     }
     

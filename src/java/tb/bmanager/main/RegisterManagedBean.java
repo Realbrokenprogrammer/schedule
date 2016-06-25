@@ -24,6 +24,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.omnifaces.util.Messages;
 import tb.bmanager.auth.RegisterActionBeanLocal;
 import tb.bmanager.entity.UserEntity;
 import tb.bmanager.entitymanager.UserEntityFacade;
@@ -92,48 +93,34 @@ public class RegisterManagedBean  implements Serializable{
         
         //Check username is within length & if its taken or not
         if(!userValidation.validateUsername(username)) {
-            String message = "Your specified username is too long or contains illegal characters.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            Messages.addGlobalError("Username too long or conatins illegal characters.");
             gotError = true;
         }else if (userFacade.findByUsername(username) != null){
-            String message = "Username already exists.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            Messages.addGlobalError("Username already exists.");
             gotError = true;
         }
         
         //Check if displayName is within length & if its taken or not
         if(!userValidation.validateDisplayname(displayName)) {
-            String message = "Your specified display name is too long or contains illegal characters.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            Messages.addGlobalError("Display name too long or conatins illegal characters.");
             gotError = true;
         }else if (userFacade.findByDisplayName(displayName) != null) {
-            String message = "Display name already exists.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            Messages.addGlobalError("Display name already exists.");
             gotError = true;
         }
         
         //Check if email is valid and if its taken
         if(!userValidation.validateEmail(email)) {
-            String message = "Your specified email is not a valid email address.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            Messages.addGlobalError("Your specified email is not a valid email address.");
             gotError = true;
         }else if (userFacade.findByEmail(email) != null) {
-            String message = "An account with specified email already exists.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            Messages.addGlobalError("An account with specified email already exists.");
             gotError = true;
         }
         
         //Check if password is strong enough
         if(!userValidation.validatePassword(password)) {
-            String message = "Your password needs to be longer than 4 characters.";
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+            Messages.addGlobalError("Your password needs to be longer than 4 characters.");
             gotError = true;
         }
         

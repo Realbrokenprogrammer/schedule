@@ -20,9 +20,9 @@ package tb.bmanager.auth;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import org.omnifaces.util.Messages;
 import tb.bmanager.entity.LoginAttemptsEntity;
 import tb.bmanager.entity.UserEntity;
 import tb.bmanager.entitymanager.LoginAttemptsEntityFacade;
@@ -72,12 +72,11 @@ public class AuthenticationActionBean implements AuthenticationActionBeanLocal {
                 context.getExternalContext().getSessionMap().put("USER", user);
                 System.out.println("Password matches");
             } else {
+                
                 addLoginAttempt();
                 
-                String message = "The user / password combination is wrong. ";
-                FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
-                }
+                Messages.addGlobalError("The user / password combination is wrong. ");
+            }
         }
     }
     
