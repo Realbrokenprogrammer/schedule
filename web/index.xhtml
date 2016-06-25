@@ -24,10 +24,48 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
       xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Facelet Title</title>
+        <title>BManager</title>
+        
+        <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"/>
+        <link rel="stylesheet" href="node_modules/primeui/primeui.min.css" />
+        
+        <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="node_modules/primeui/primeui.min.js"></script>
+        
+        <style type="text/css">
+        .ui-widget,.ui-widget .ui-widget {
+            font-size: 90% !important;
+        }
+        
+        .ui-icon.fa {
+            text-indent:0px;
+            background-image:none;
+        }
+        </style>
     </h:head>
+    
     <h:body>
-        Hello from Facelets
+        <header>
+            <h:form>  
+                <p:growl id="messages"/>
+
+                <p:menubar>
+                    
+                    <p:menuitem value="Home" url="http://www.primefaces.org" icon="fa-bar-chart-o" />
+                    <p:menuitem value="About" url="http://www.primefaces.org" icon="fa-bar-chart-o" />
+                    <p:menuitem value="About" url="http://www.primefaces.org" icon="fa-bar-chart-o" />
+                    <p:menuitem value="About" url="http://www.primefaces.org" icon="fa-bar-chart-o" />
+
+                    <f:facet name="options">
+                        <p:inputText style="margin-right:10px" placeholder="Search"/>
+                        <p:commandButton type="button" value="Sign In" icon="ui-icon-extlink" />
+                        <p:commandButton type="button" value="Sign Up" icon="ui-icon-extlink" />
+                    </f:facet>
+                </p:menubar>
+            </h:form>
+        </header>
     
     <h1>#{indexManagedBean.helloMsg()}</h1>
     

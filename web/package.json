@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/TeamBreak/BManager#readme",
   "devDependencies": {
+    "font-awesome": "^4.6.3",
+    "jquery": "^3.0.0",
     "primeui": "^4.1.12"
   }
 }
