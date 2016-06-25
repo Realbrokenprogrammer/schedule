@@ -1,0 +1,28 @@
+{
+  "name": "bmanager",
+  "version": "0.0.0",
+  "description": "A productivity tool to help you structure your project process.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://brokenprogrammer@github.com/TeamBreak/BManager.git"
+  },
+  "keywords": [
+    "productivity"
+  ],
+  "author": "Oskar Mendel",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/TeamBreak/BManager/issues"
+  },
+  "homepage": "https://github.com/TeamBreak/BManager#readme",
+  "devDependencies": {
+    "primeui": "^4.1.12"
+  }
+}
