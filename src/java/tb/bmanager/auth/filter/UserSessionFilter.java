@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import javax.faces.application.ResourceHandler;
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -32,6 +30,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.omnifaces.filter.HttpFilter;
+import org.omnifaces.util.Servlets;
 
 /**
  * Filters the request checking if there is a user session available.
@@ -42,7 +42,7 @@ import javax.servlet.http.HttpSession;
  * %date 14:14:20 PM, Jun 20, 2016
  */
 @WebFilter("/b/*")
-public class UserSessionFilter implements Filter {
+public class UserSessionFilter extends HttpFilter {
     
     private static final boolean debug = true;
 
@@ -50,10 +50,6 @@ public class UserSessionFilter implements Filter {
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
-    
-    private static final String AJAX_REDIRECT_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-        + "<partial-response><redirect url=\"%s\"></redirect></partial-response>";
-
     
     public UserSessionFilter() {
     }    
@@ -112,82 +108,6 @@ public class UserSessionFilter implements Filter {
     }
 
     /**
-     *
-     * @param request The servlet request we are processing
-     * @param response The servlet response we are creating
-     * @param chain The filter chain we are processing
-     *
-     * @exception IOException if an input/output error occurs
-     * @exception ServletException if a servlet error occurs
-     */
-    public void doFilter(ServletRequest request, ServletResponse response,
-            FilterChain chain)
-            throws IOException, ServletException {
-        
-        if (debug) {
-            log("UserSessionFilter:doFilter()");
-        }
-        
-        doBeforeProcessing(request, response);
-        
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-        HttpSession session = req.getSession(false);
-        String loginURL = req.getContextPath() + "/login.xhtml";
-        
-        boolean loggedIn = (session != null) && (session.getAttribute("USER") != null);
-        boolean loginRequest = req.getRequestURI().equals(loginURL);
-        boolean resourceRequest = req.getRequestURI().startsWith(req.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER + "/");
-        boolean ajaxRequest = "partial/ajax".equals(req.getHeader("Faces-Request"));
-        
-        
-        Throwable problem = null;
-        try {
-            if (loggedIn || resourceRequest) {
-                if(!resourceRequest) {
-                    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-                    res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-                    res.setDateHeader("Expires", 0); // Proxies.
-                }
-                chain.doFilter(req, res);
-            }else if (ajaxRequest) {
-                res.setContentType("text/xml");
-                res.setCharacterEncoding("UTF-8");
-                res.getWriter().printf(AJAX_REDIRECT_XML, loginURL); // So, return special XML response instructing JSF ajax to send a redirect.
-            }else {
-                res.sendRedirect(loginURL); // So, just perform standard synchronous redirect.
-            }
-        } catch (Throwable t) {
-            // If an exception is thrown somewhere down the filter chain,
-            // we still want to execute our after processing, and then
-            // rethrow the problem after that.
-            problem = t;
-            t.printStackTrace();
-        }
-        
-        doAfterProcessing(request, response);
-
-        // If there was a problem, we want to rethrow it if it is
-        // a known type, otherwise log it.
-        if (problem != null) {
-            if (problem instanceof ServletException) {
-                throw (ServletException) problem;
-            }
-            if (problem instanceof IOException) {
-                throw (IOException) problem;
-            }
-            sendProcessingError(problem, response);
-        }
-    }
-
-    /**
-     * Return the filter configuration object for this filter.
-     */
-    public FilterConfig getFilterConfig() {
-        return (this.filterConfig);
-    }
-
-    /**
      * Set the filter configuration object for this filter.
      *
      * @param filterConfig The filter configuration object
@@ -195,24 +115,7 @@ public class UserSessionFilter implements Filter {
     public void setFilterConfig(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
     }
-
-    /**
-     * Destroy method for this filter
-     */
-    public void destroy() {        
-    }
-
-    /**
-     * Init method for this filter
-     */
-    public void init(FilterConfig filterConfig) {        
-        this.filterConfig = filterConfig;
-        if (filterConfig != null) {
-            if (debug) {                
-                log("UserSessionFilter:Initializing filter");
-            }
-        }
-    }
+    
 
     /**
      * Return a String representation of this object.
@@ -274,6 +177,38 @@ public class UserSessionFilter implements Filter {
     
     public void log(String msg) {
         filterConfig.getServletContext().log(msg);        
+    }
+
+    /**
+     * 
+     * 
+     * @param request
+     * @param response
+     * @param session
+     * @param chain
+     * @throws ServletException
+     * @throws IOException 
+     */
+    @Override
+    public void doFilter(HttpServletRequest request, HttpServletResponse response, HttpSession session, FilterChain chain)
+            throws ServletException, IOException {
+        
+        String loginURL = request.getContextPath() + "/login.xhtml";
+
+        boolean loggedIn = (session != null) && (session.getAttribute("USER") != null);
+        boolean loginRequest = request.getRequestURI().equals(loginURL);
+        boolean resourceRequest = Servlets.isFacesResourceRequest(request);
+
+        if (loggedIn || loginRequest || resourceRequest) {
+            if (!resourceRequest) { // Prevent browser from caching restricted resources. See also http://stackoverflow.com/q/4194207/157882
+                Servlets.setNoCacheHeaders(response);
+            }
+
+            chain.doFilter(request, response); // So, just continue request.
+        }
+        else {
+            Servlets.facesRedirect(request, response, loginURL);
+        }
     }
     
 }
