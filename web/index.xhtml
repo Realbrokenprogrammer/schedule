@@ -29,28 +29,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="resources/css/slick.css"/>
         <link rel="stylesheet" type="text/css" href="resources/css/slick-theme.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/stylesheet.css"/>
         
         <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="resources/js/slick.min.js"></script>
         <script type="text/javascript" src="resources/js/main.js"></script>
-        <style type="text/css">
-        .ui-widget,.ui-widget .ui-widget {
-            font-size: 90% !important;
-        }
-        
-        .ui-icon.fa {
-            text-indent:0px !important;
-            background-image:none !important;
-        }
-        
-        .ui-menu .ui-menuitem-link .ui-menuitem-icon {
-            position: static !important;
-        }
-        
-        .slick-prev:before, .slick-next:before { 
-            color:red !important;
-        }
-        </style>
     </h:head>
     
     <h:body>
@@ -77,11 +60,27 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
             </h:form>
         </header>
     
-        <section style="width:80%; margin-left: auto; margin-right: auto;">
-            <div class="your-class">
-                <div>your content</div>
-                <div>your content</div>
-                <div>your content</div>
+        <section class="bmanager-grabber">
+            <div class="grabber-carousel">
+
+                <!-- Slide 1 -->
+                <div class="carousel-slide">
+                    <div class="double-column centered centered-text">
+                        <!-- Column 1 -->
+                        <h1 class="headline">The Social Task Manager Software</h1>
+                        <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div><div 
+                        class="double-column centered">
+                        <!-- Column 2 -->
+                        <div class="mobileImage"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-slide">your content</div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-slide">your content</div>
           </div>
             <button type="button" class="slick-prev">Previous</button>
             <button type="button" class="slick-next">Next</button>

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){
-  $('.your-class').slick({
+  $('.grabber-carousel').slick({
     accessibility: true,
     arrows: true,
     mobileFirst: true,
