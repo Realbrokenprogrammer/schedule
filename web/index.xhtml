@@ -27,13 +27,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         <title>BManager</title>
         
         <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"/>
-        <link rel="stylesheet" href="node_modules/primeui/primeui.min.css" />
+        <link rel="stylesheet" type="text/css" href="resources/css/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/slick-theme.css"/>
         
         <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="node_modules/primeui/primeui.min.js"></script>
-        
+        <script type="text/javascript" src="resources/js/slick.min.js"></script>
+        <script type="text/javascript" src="resources/js/main.js"></script>
         <style type="text/css">
         .ui-widget,.ui-widget .ui-widget {
             font-size: 90% !important;
@@ -47,13 +46,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         .ui-menu .ui-menuitem-link .ui-menuitem-icon {
             position: static !important;
         }
+        
+        .slick-prev:before, .slick-next:before { 
+            color:red !important;
+        }
         </style>
     </h:head>
     
     <h:body>
+        <f:view encoding="UTF-8" contentType="text/html">
+        </f:view>
+        
         <header>
             <h:form>  
-                <p:growl id="messages"/>
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
                 <p:menubar>
                     
@@ -71,6 +77,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
             </h:form>
         </header>
     
+        <section style="width:80%; margin-left: auto; margin-right: auto;">
+            <div class="your-class">
+                <div>your content</div>
+                <div>your content</div>
+                <div>your content</div>
+          </div>
+            <button type="button" class="slick-prev">Previous</button>
+            <button type="button" class="slick-next">Next</button>
+        </section>
+        
     <h1>#{indexManagedBean.helloMsg()}</h1>
     
     <hr></hr>
@@ -116,5 +132,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
     </ul>
     
     </h:body>
+    
 </html>
 
