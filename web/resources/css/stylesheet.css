@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 /* PrimeFaces font size. */
 .ui-widget,.ui-widget .ui-widget {
     font-size: 90% !important;
@@ -33,16 +37,17 @@
 
 /* Carousel Buttons */
 .bmanager-grabber .slick-prev:before, .slick-next:before { 
-    color:red !important;
+    /* color:red !important; */
+    color: #c0c0c0 !important;
 }
 
 /* Carousel left Button */
 .bmanager-grabber .slick-prev {
-    left: -30px;
+    left: -30px !important;
 }
 /* Carousel right Button */
 .bmanager-grabber .slick-next {
-    right: -30px;
+    right: -30px !important;
 }
 
 /* Carousel dots */
@@ -50,13 +55,17 @@
     position: static;
 }
 
+/* Carousel dots bottom margin */
+.slick-dotted.slick-slider {
+    margin-bottom: 0;
+}
+
 /* Carousel dots */
 .bmanager-grabber .slick-dots li button:before {
-    font-size: 24px;
+    font-size: 10px;
     line-height: 10px;
     width: 10px;
     height: 10px;
-    background-color: #959595;
     color: #c0c0c0;
     border-radius: 25px;
 }
@@ -87,6 +96,52 @@
     color: #fff;
 }
 
+/* Stay Connected Section */
+.bmanager-connected {
+    background-color: #2a567f;
+    height: 150px;
+}
+
+.bmanager-connected h1,h2 {
+    margin: 0;
+    color: #FFF;
+    text-align: center;
+}
+
+.bmanager-connected h1 {
+    padding-top: 20px;
+}
+
+.bmanager-connected h2 {
+}
+
+.github-button-wrapper {
+    padding-top: 20px;
+    width: 100px;
+}
+
+/* BManager Projects Section */
+.projects-nav {
+    width: 80%;
+    padding-top: 20px;
+}
+
+.projects-nav-cat {
+    width: 24%;
+    display: inline-block;
+    text-align: center;
+    color: #c2c2c2;
+}
+
+.projects-nav-cat.selected{
+    color:  #51a5f7;
+}
+
+.bmanager-projects .projects-wrapper {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 /* UTIL CSS CLASSES*/
 .centered{

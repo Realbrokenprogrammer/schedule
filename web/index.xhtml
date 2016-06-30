@@ -34,6 +34,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="resources/js/slick.min.js"></script>
         <script type="text/javascript" src="resources/js/main.js"></script>
+
+        <!-- Star on github asynchronous request script. -->
+        <script async="async" defer="true" src="https://buttons.github.io/buttons.js"></script>
     </h:head>
     
     <h:body>
@@ -85,8 +88,55 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
             <button type="button" class="slick-prev">Previous</button>
             <button type="button" class="slick-next">Next</button>
         </section>
+
+        <section class="bmanager-connected">
+            <h1>Stay Connected</h1>
+            <h2>Follow our development process</h2>
+            <!-- Place this tag where you want the button to render. -->
+            <div class="github-button-wrapper centered">
+            <a class="github-button" href="https://github.com/TeamBreak/Bmanager" data-style="mega" data-count-href="/TeamBreak/Bmanager/stargazers" data-count-api="/repos/TeamBreak/Bmanager#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star TeamBreak/Bmanager on GitHub">Star</a>
+            </div>
+        </section>
+
+        <section class="bmanager-projects">
+            <div class="projects-nav centered">
+                <hr></hr>
+                <h1 class="projects-nav-cat selected">Most Popular</h1>
+                <h1 class="projects-nav-cat">Newest</h1>
+                <h1 class="projects-nav-cat">Top Rated</h1>
+                <h1 class="projects-nav-cat">Most Discussed</h1>
+                <hr></hr>
+            </div>
+
+            <h:form> 
+                <p:dataScroller value="#{userManagedBean.getAll()}" styleClass="projects-wrapper" columns="2" var="car" chunkSize="10">
+                    <f:facet name="header">
+                        Scroll Down to Load More Cars
+                    </f:facet>
+
+                    <f:facet name="loader">
+                        <p:commandButton type="button" value="More" icon="ui-icon-circle-triangle-s"/>
+                    </f:facet>
+             
+                    <h:panelGrid columns="1" style="width:50%; float:left; text-align:center;" columnClasses="detail">
+                        <p:outputPanel>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Id:" />
+                                <h:outputText value="#{car.id}" style="font-weight: bold"/>
+             
+                                <h:outputText value="Year:" />
+                                <h:outputText value="#{car.username}" style="font-weight: bold"/>
+             
+                                <h:outputText value="Color:" />
+                                <h:outputText value="#{car.displayname}" style="font-weight: bold"/>
+                            </h:panelGrid>
+                        </p:outputPanel>
+                    </h:panelGrid>
+                </p:dataScroller>
+            </h:form>
+        </section>
         
-    <h1>#{indexManagedBean.helloMsg()}</h1>
+    <h1 style="clear:both;">#{indexManagedBean.helloMsg()}</h1>
     
     <hr></hr>
     
