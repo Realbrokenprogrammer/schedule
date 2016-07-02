@@ -143,6 +143,25 @@ body {
     margin-right: auto;
 }
 
+/* Register Page Wrapper */
+.registerpage-wrapper {
+    padding-top: 20px;
+    width: 80%;
+}
+
+.user-creation-img {
+    background-image: url("../img/profileimg.png");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    border: 1px solid #000;
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* UTIL CSS CLASSES*/
 .centered{
     margin-left: auto;
@@ -150,4 +169,11 @@ body {
 }
 .centered-text {
     text-align: center;
+}
+
+.col-2 {
+    width: 50%;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
 }

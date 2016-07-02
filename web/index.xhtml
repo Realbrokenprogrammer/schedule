@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>BManager</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         
         <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="resources/css/slick.css"/>
@@ -56,8 +57,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                     
                     <f:facet name="options">
                         <p:inputText style="margin-right:10px" placeholder="Search"/>
-                        <p:commandButton type="button" value="Sign In" icon="ui-icon-extlink" />
-                        <p:commandButton type="button" value="Sign Up" icon="ui-icon-extlink" />
+                        <p:commandButton value="Sign In" ajax="false" action="login.xhtml?faces-redirect=true" icon="ui-icon-extlink" />
+                        <p:commandButton value="Sign Up" ajax="false" action="register.xhtml?faces-redirect=true" icon="ui-icon-extlink" />
                     </f:facet>
                 </p:menubar>
             </h:form>
@@ -120,6 +121,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
              
                     <h:panelGrid columns="1" style="width:50%; float:left; text-align:center;" columnClasses="detail">
                         <p:outputPanel>
+                            <h1>Test</h1>
+                            <!-- TODO: Style acording to PSD. -->
                             <h:panelGrid columns="2" cellpadding="5">
                                 <h:outputText value="Id:" />
                                 <h:outputText value="#{car.id}" style="font-weight: bold"/>
