@@ -25,36 +25,74 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     
     <h:head>
-        <title>Login page</title>
+        <title>BManager Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="resources/css/stylesheet.css"/>
+        
+        <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="resources/js/main.js"></script>
     </h:head>
     
-    <body>
-        <h1>Failed Attempts: #{loginManagedBean.failedLogins()}</h1>
-        <f:view>
-        <h:form id="loginForm">
-            <p:messages id="messages" showDetail="false" autoUpdate="true" />
-            <table>
-                <tr>
-                    <td><h:outputText value="Enter Your User Name:" /></td>
-                    <td><p:inputText id="uname" value="#{loginManagedBean.username}"
-                            required="true" requiredMessage="Please enter your user name" /></td>
-                    <td><h:message for="uname" style="color:red" /></td>
-                </tr>
-                <tr>
-                    <td><h:outputText value="Enter Password :" /></td>
-                    <td><p:password id="psw" value="#{loginManagedBean.password}" label="Password Field" feedback="true" inline="true" required="true" /></td>
-                    <td><h:message for="psw" style="color:red" /></td>
-                </tr>
-                <tr>
-                    <td />
-                    <td><p:commandButton value="Login" id="nonAjax" actionListener="#{loginManagedBean.verifyLogin()}" ajax="false" /></td>
-                </tr>
-                <tr>
-                    <td><h:outputLink value="index.xhtml">Home</h:outputLink></td>
-                </tr>
-            </table>
-        </h:form>
-    </f:view>
-    </body>
+    <h:body>
+
+        <f:view encoding="UTF-8" contentType="text/html">
+        </f:view>
+
+        <header>
+            <h:form>
+                <p:menubar>
+                    
+                    <p:menuitem value="BManager" url="http://www.primefaces.org" icon="" />
+                    <p:menuitem value="Features" url="http://www.primefaces.org" />
+                    <p:menuitem value="Integrations" url="http://www.primefaces.org" />
+                    <p:menuitem value="Explore" url="http://www.primefaces.org" />
+                    
+                    <f:facet name="options">
+                        <p:inputText style="margin-right:10px" placeholder="Search"/>
+                        <p:commandButton value="Sign In" ajax="false" action="login.xhtml?faces-redirect=true" icon="ui-icon-extlink" />
+                        <p:commandButton value="Sign Up" ajax="false" action="register.xhtml?faces-redirect=true" icon="ui-icon-extlink" />
+                    </f:facet>
+                </p:menubar>
+
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />   
+            </h:form>
+        </header>
+
+        <div class="loginpage-wrapper centered">
+            <h:panelGroup layout="block" rendered="#{loginManagedBean.failedLogins() > 0}">
+                <h1 class="centered-text">Failed Attempts: #{loginManagedBean.failedLogins()}</h1>
+            </h:panelGroup>
+            <h:form id="loginForm">
+                <p:messages id="messages" showDetail="false" autoUpdate="true" />
+                <table class="centered">
+                    <tr>
+                        <td><h:outputText value="Enter Your User Name:" /></td>
+                        <td>
+                            <p:inputText id="uname" value="#{loginManagedBean.username}"
+                                required="true" requiredMessage="Please enter your user name"
+                                validatorMessage="Username too long or conatins illegal characters.">
+                                <f:validateRegex pattern="^[A-Za-z0-9_-]{3,20}$" />
+                            </p:inputText>
+                        </td>
+                        <td><h:message for="uname" style="color:red" /></td>
+                    </tr>
+                    <tr>
+                        <td><h:outputText value="Enter Password :" /></td>
+                        <td><p:password id="psw" value="#{loginManagedBean.password}" label="Password Field" feedback="true" inline="true" required="true" /></td>
+                        <td><h:message for="psw" style="color:red" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:commandButton value="Login" id="nonAjax" actionListener="#{loginManagedBean.verifyLogin()}" ajax="false" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><h:outputLink value="index.xhtml">Home</h:outputLink></td>
+                    </tr>
+                </table>
+            </h:form>
+        </div>
+    </h:body>
 </html>

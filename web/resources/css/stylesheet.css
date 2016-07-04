@@ -162,6 +162,12 @@ body {
     margin-right: auto;
 }
 
+/* Login Page Wrapper */
+.loginpage-wrapper {
+    padding-top: 20px;
+    width: 80%;
+}
+
 /* UTIL CSS CLASSES*/
 .centered{
     margin-left: auto;

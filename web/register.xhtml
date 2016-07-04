@@ -39,7 +39,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         <script type="text/javascript" src="resources/js/main.js"></script>
 
     </h:head>
-    <body>
+    <h:body class="registerPage">
 
         <f:view encoding="UTF-8" contentType="text/html">
         </f:view>
@@ -70,20 +70,35 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                     <table>
                         <tr>
                             <td><h:outputText value="Enter Your User Name:" /></td>
-                            <td><p:inputText id="fname" value="#{registerManagedBean.username}"
-                                    required="true" requiredMessage="Please enter your user name" /></td>
+                            <td>
+                                <p:inputText id="fname" value="#{registerManagedBean.username}"
+                                    required="true" requiredMessage="Please enter your user name"
+                                    validatorMessage="Username too long or conatins illegal characters."> 
+                                    <f:validateRegex pattern="^[A-Za-z0-9_-]{3,20}$" />
+                                </p:inputText>
+                            </td>
                             <td><h:message for="fname" style="color:red" /></td>
                         </tr>
                         <tr>
                             <td><h:outputText value="Enter Your Display Name:" /></td>
-                            <td><p:inputText id="dname" value="#{registerManagedBean.displayName}"
-                                    required="true" requiredMessage="Please enter your display name" /></td>
+                            <td>
+                                <p:inputText id="dname" value="#{registerManagedBean.displayName}"
+                                    required="true" requiredMessage="Please enter your display name"
+                                    validatorMessage="DisplayName too long or conatins illegal characters."> 
+                                    <f:validateRegex pattern="^[A-Za-z0-9_-]{3,20}$" />
+                                </p:inputText>
+                            </td>
                             <td><h:message for="dname" style="color:red" /></td>
                         </tr>
                         <tr>
                             <td><h:outputText value="Enter Your email ID:" /></td>
-                            <td><p:inputText id="email" value="#{registerManagedBean.email}"
-                                    required="true" requiredMessage="Please enter your email id" /></td>
+                            <td>
+                                <p:inputText id="email" value="#{registerManagedBean.email}"
+                                    required="true" requiredMessage="Please enter your email id"
+                                    validatorMessage="Your specified email is not a valid email address.">
+                                    <f:validateRegex pattern="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$" />
+                                </p:inputText>
+                            </td>
                             <td><h:message for="email" style="color:red" /></td>
                         </tr>
                         <tr>
@@ -93,33 +108,27 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                         </tr>
                         <tr>
                             <td><h:outputText value="Confirm Password :" /></td>
-                            <td><p:password id="psw2" value="#{registerManagedBean.password}" label="Password 2" required="true" /></td>
+                            <td><p:password id="psw2" value="#{registerManagedBean.password}" label="Password 2" required="true" />
+                            </td>
                             <td><h:message for="psw" style="color:red" /></td>
                         </tr>
                         <tr>
                             <td />
-                            <td><p:commandButton value="Register" id="nonAjax" actionListener="#{registerManagedBean.verifyRegistration()}" ajax="false" /></td>
+                            <td>
+                                <p:commandButton value="Register" id="nonAjax" actionListener="#{registerManagedBean.verifyRegistration()}" ajax="false" />
+                            </td>
                         </tr>
                         <tr>
                             <td><h:outputLink value="index.xhtml">Home</h:outputLink></td>
                         </tr>
                     </table>
                 </h:form>
-            </div><div 
-            class="col-2">
+            </div><div class="col-2">
                 <div class="user-creation-img"></div>
-                <h1 id="fnamePrev">Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
+                <p id="fnamePrev"></p>
+                <p id="dnamePrev"></p>
+                <p id="emailPrev"></p>
             </div>
         </div>
-
-        <script type="text/javascript">
-            var fnameField = document.getElementById('registerForm:fname');
-
-            fnameField.onkeyup = function() {
-                document.getElementById('fnamePrev').innerHTML = fnameField.value;
-            }
-        </script>
-    </body>
+    </h:body>
 </html>

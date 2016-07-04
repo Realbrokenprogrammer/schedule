@@ -63,11 +63,13 @@ public class UserEntityFacade extends AbstractFacade<UserEntity> {
         Query q = em.createQuery("SELECT u FROM UserEntity u WHERE u.username = :username");
         q.setParameter("username", Username);
         List<UserEntity> users = q.getResultList();
-        
+        System.out.println(q.getResultList().size());
         if (users.isEmpty() || users == null) {
             System.out.println("USER NOT FOUND");
             return null;
         } else {
+            //TODO: Loop through and check which username matches since it gets
+            //  all records case-insensitive.
             System.out.println("USER WAS FOUND" + users.get(0).getUsername());
             return users.get(0);
         }
