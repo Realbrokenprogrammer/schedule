@@ -68,10 +68,14 @@ public class UserEntityFacade extends AbstractFacade<UserEntity> {
             System.out.println("USER NOT FOUND");
             return null;
         } else {
-            //TODO: Loop through and check which username matches since it gets
-            //  all records case-insensitive.
-            System.out.println("USER WAS FOUND" + users.get(0).getUsername());
-            return users.get(0);
+            
+            for (int i = 0; i < users.size(); i++) {
+                if (users.get(i).getUsername().equals(Username)) {
+                    System.out.println("USER WAS FOUND" + users.get(0).getUsername());
+                    return users.get(i);
+                }
+            }
+            return null;
         }
     }
     

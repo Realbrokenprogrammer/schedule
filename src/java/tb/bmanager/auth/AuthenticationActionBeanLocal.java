@@ -38,7 +38,7 @@ public interface AuthenticationActionBeanLocal {
      * @param username - specified username.
      * @param password - specified password.
      */
-    public void preformAuthentication(String username, String password);
+    public boolean preformAuthentication(String username, String password);
     
     /**
      * 

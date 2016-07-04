@@ -27,6 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
     <h:head>
         <title>BManager Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charset="utf-8"/>
 
         <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="resources/css/stylesheet.css"/>
@@ -35,7 +36,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         <script type="text/javascript" src="resources/js/main.js"></script>
     </h:head>
     
-    <h:body>
+    <h:body addlabels="false">
 
         <f:view encoding="UTF-8" contentType="text/html">
         </f:view>
@@ -56,7 +57,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                     </f:facet>
                 </p:menubar>
 
-                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />   
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+  
             </h:form>
         </header>
 
@@ -65,7 +67,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                 <h1 class="centered-text">Failed Attempts: #{loginManagedBean.failedLogins()}</h1>
             </h:panelGroup>
             <h:form id="loginForm">
-                <p:messages id="messages" showDetail="false" autoUpdate="true" />
                 <table class="centered">
                     <tr>
                         <td><h:outputText value="Enter Your User Name:" /></td>

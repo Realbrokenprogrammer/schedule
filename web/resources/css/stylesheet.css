@@ -168,6 +168,12 @@ body {
     width: 80%;
 }
 
+.dashboardHeader .ui-menubar{
+    width: 80% !important; 
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
 /* UTIL CSS CLASSES*/
 .centered{
     margin-left: auto;

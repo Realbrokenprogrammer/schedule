@@ -17,11 +17,15 @@
  */
 package tb.bmanager.auth;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import tb.bmanager.entity.LoginAttemptsEntity;
 import tb.bmanager.entity.UserEntity;
@@ -56,14 +60,15 @@ public class AuthenticationActionBean implements AuthenticationActionBeanLocal {
      * @param username - specified username.
      * @param password - specified password.
      */
-    public void preformAuthentication(String username, String password) {
+    public boolean preformAuthentication(String username, String password) {
         FacesContext context = FacesContext.getCurrentInstance();
         System.out.println("Made it to perform Auth.");
         
         user = userFacade.findByUsername(username);
         
         if (user == null) {
-            return;
+            Messages.addGlobalError("User does not exist.");
+            return false;
         }
         
         if (user.getUsername().equals(username)) {
@@ -71,6 +76,7 @@ public class AuthenticationActionBean implements AuthenticationActionBeanLocal {
             if(BCrypt.checkpw(password, user.getPassword())) {
                 context.getExternalContext().getSessionMap().put("USER", user);
                 System.out.println("Password matches");
+                return true;
             } else {
                 
                 addLoginAttempt();
@@ -78,6 +84,7 @@ public class AuthenticationActionBean implements AuthenticationActionBeanLocal {
                 Messages.addGlobalError("The user / password combination is wrong. ");
             }
         }
+        return false;
     }
     
     /**

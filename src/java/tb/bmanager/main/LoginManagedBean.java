@@ -17,6 +17,7 @@
  */
 package tb.bmanager.main;
 
+import java.io.IOException;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -24,6 +25,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import tb.bmanager.auth.AuthenticationActionBeanLocal;
 import tb.bmanager.entitymanager.UserEntityFacade;
@@ -62,7 +64,7 @@ public class LoginManagedBean implements Serializable{
      * Called when user clicks the login button in the view, validates input then
      * sends input to AuthenticationActionBean to authenticate user.
      */
-    public void verifyLogin() {
+    public void verifyLogin() throws IOException {
         //Thread local variable to prevent multiple forms to submit different info.
         String username = this.username;
         String password = this.password;
@@ -83,7 +85,10 @@ public class LoginManagedBean implements Serializable{
                 Messages.addGlobalError("Your password needs to be longer than 4 characters.");
             }
 
-            login.preformAuthentication(username, password);
+            if (login.preformAuthentication(username, password) == true) {
+                Faces.redirect("b/dashboard.xhtml");
+            }
+            
         } else {
             Messages.addGlobalError("Too many failed login attempts, try again later.");
         }

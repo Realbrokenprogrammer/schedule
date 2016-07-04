@@ -17,13 +17,66 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
         <title>Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <h1>Welcome #{user}</h1>
+        <meta charset="utf-8"/>
+
+        <link rel="stylesheet" type="text/css" href="../node_modules/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="../resources/css/stylesheet.css"/>
+        
+        <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="../resources/js/main.js"></script>
+
+        <script type="text/javascript" src="../resources/js/app/app.js"></script>
+    </h:head>
+    <h:body id="angular" ng-app="BManager">
+        <f:view encoding="UTF-8" contentType="text/html">
+        </f:view>
+        
+        <header class="dashboardHeader">
+            <h:form>  
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+                <p:menubar>
+                    
+                    <p:menuitem value="BManager" url="http://www.primefaces.org" icon="" />
+                    <p:menuitem value="Overview" url="http://www.primefaces.org" />
+                    <p:menuitem value="Projects" url="http://www.primefaces.org" />
+                    <p:menuitem value="Explore" url="http://www.primefaces.org" />
+                    
+                    <p:submenu label="#{USER.username}" icon="ui-icon-document" style="float:right; display: inline-block;">
+                        <p:menuitem value="Your Profile" url="#" />
+                        <p:menuitem value="Your Stars" url="#" />
+                        <p:menuitem value="Integrations" url="#" />
+                        <p:menuitem value="Help" url="#" />
+                        <p:separator />
+                        <p:menuitem value="Settings" url="#" />
+                        <p:menuitem value="Sign Out" url="#" />
+                    </p:submenu>
+                    <p:submenu icon="ui-icon-plus" style="float:right; display: inline-block;">
+                        <p:menuitem value="New Project" url="#" />
+                    </p:submenu>
+                </p:menubar>
+
+            </h:form>
+        </header>
+
+        <h1>Welcome #{USER.username}</h1>
         <div>This will be a protected view.</div>
-    </body>
+        <p>1 + 2 = {{1 + 2}}</p>
+
+        <div ng-app="">
+            <h:form> 
+		  	    <p>Name : <input type="text" ng-model="name"></input></p>
+		 	    <h1>Hello {{name}}</h1>
+            </h:form> 
+		</div>
+    </h:body>
 </html>

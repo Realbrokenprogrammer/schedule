@@ -5,6 +5,17 @@
         <param-value>Development</param-value>
     </context-param>
     
+    <context-param>
+        <param-name>javax.faces.FACELETS_DECORATORS</param-name>
+        <param-value>
+            de.beyondjava.angularFaces.core.tagTransformer.AngularTagDecorator
+        </param-value>
+    </context-param>
+    <context-param>
+        <param-name>clientSideMessages</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    
     <filter>
         <filter-name>UserSessionFilter</filter-name>
         <filter-class>tb.bmanager.auth.filter.UserSessionFilter</filter-class>
@@ -32,6 +43,6 @@
     </session-config>
     
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
