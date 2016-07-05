@@ -30,16 +30,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
         <link rel="stylesheet" type="text/css" href="../node_modules/font-awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="../resources/css/stylesheet.css"/>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
         
         <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="../resources/js/main.js"></script>
+        <script type="text/javascript" src="../node_modules/angular-route/angular-route.min.js"></script>
+        <!--<script type="text/javascript" src="../resources/js/main.js"></script>-->
 
         <script type="text/javascript" src="../resources/js/app/app.js"></script>
     </h:head>
-    <h:body id="angular" ng-app="BManager">
+
+    <h:body id="angular" ng-app="BManager" ng-controller="mainController">
+
         <f:view encoding="UTF-8" contentType="text/html">
         </f:view>
         
+        <!-- HEADER AND NAVBAR -->
         <header class="dashboardHeader">
             <h:form>  
                 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
@@ -61,22 +66,24 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                         <p:menuitem value="Sign Out" url="#" />
                     </p:submenu>
                     <p:submenu icon="ui-icon-plus" style="float:right; display: inline-block;">
-                        <p:menuitem value="New Project" url="#" />
+                        <p:menuitem value="New Project" url="#/project/create" />
                     </p:submenu>
                 </p:menubar>
 
             </h:form>
         </header>
 
+        <!-- MAIN CONTENT AND INJECTED VIEWS -->
+        <div id="main">
+            <!-- angular templating -->
+            <!-- this is where content will be injected -->
+            <div ng-view=""></div>
+
+        </div>
+
         <h1>Welcome #{USER.username}</h1>
         <div>This will be a protected view.</div>
         <p>1 + 2 = {{1 + 2}}</p>
 
-        <div ng-app="">
-            <h:form> 
-		  	    <p>Name : <input type="text" ng-model="name"></input></p>
-		 	    <h1>Hello {{name}}</h1>
-            </h:form> 
-		</div>
     </h:body>
 </html>

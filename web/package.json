@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/TeamBreak/BManager#readme",
   "devDependencies": {
+    "angular": "^1.5.7",
+    "angular-route": "^1.5.7",
     "font-awesome": "^4.6.3",
     "jquery": "^3.0.0"
   }

@@ -175,6 +175,10 @@ body {
 }
 
 /* UTIL CSS CLASSES*/
+.wrapper {
+    width: 80%;
+}
+
 .centered{
     margin-left: auto;
     margin-right: auto;
