@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -15,10 +15,10 @@
 		<!-- Projects overview -->
 		<section>
 			<h:form id="form">
-			    <p:dataGrid var="car" value="#{userManagedBean.getAll()}" columns="2" layout="grid"
+			    <p:dataGrid var="car" value="#{projectManagedBean.getUserProjects(USER.id)}" columns="2" layout="grid"
 			        rows="12" paginator="true" id="cars"
 			        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			        rowsPerPageTemplate="6,12,16">
+			        rowsPerPageTemplate="6,12,16" emptyMessage="You are not a member of any projects.">
 			 
 			        <f:facet name="header">
 			            Projects
@@ -36,4 +36,4 @@
 			</h:form>
 		</section>
 	</div>
-</html>
+</ui:fragment>
