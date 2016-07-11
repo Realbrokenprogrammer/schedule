@@ -19,6 +19,7 @@ package tb.bmanager.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +27,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -34,6 +36,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import tb.bmanager.entity.project.ProjectEntity;
 
 /**
  * UserEntity acts like a model for the user table in the database.
@@ -111,6 +114,8 @@ public class UserEntity implements Serializable {
     @Size(max = 200)
     @Column(name = "profileimg")
     private String profileimg;
+    @ManyToMany(mappedBy="users")
+    private List<ProjectEntity> userProjects;
 
     public UserEntity() {
     }
@@ -321,6 +326,15 @@ public class UserEntity implements Serializable {
         this.profileimg = profileimg;
     }
 
+    public List<ProjectEntity> getUserprojects() {
+        return userProjects;
+    }
+    
+    public void setUserprojects(List<ProjectEntity> userProjects) {
+        this.userProjects = userProjects;
+    }
+        
+    
     @Override
     public int hashCode() {
         int hash = 0;

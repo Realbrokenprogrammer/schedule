@@ -18,12 +18,15 @@
 package tb.bmanager.main;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import tb.bmanager.entity.project.ProjectEntity;
 import tb.bmanager.entitymanager.ProjectEntityFacade;
+import tb.bmanager.entitymanager.UserEntityFacade;
 
 /**
  *
@@ -35,6 +38,11 @@ public class ProjectManagedBean implements Serializable{
     
     @EJB
     private ProjectEntityFacade projectFacade;
+    
+    @EJB
+    private UserEntityFacade userFacade;
+    
+    private String publicity;
     
     /**
      * 
@@ -54,11 +62,40 @@ public class ProjectManagedBean implements Serializable{
     
     /**
      * 
-     * @param userid
+     * @param projectid
      * @return 
      */
-    public List<ProjectEntity> getUserProjects(int userid) {
-        System.out.println("Getting all users projects from userid: " + userid);
+    public List<ProjectEntity> getAllProjectUsers(int projectid) {
+        System.out.println("Getting all the projects users from projectid: " + projectid);
+        /*ProjectEntity newProject = new ProjectEntity();
+        newProject.setName("TestProj");
+        newProject.setOwnerid(userid);
+        
+        List userList = new ArrayList();
+        userList.add(userFacade.find(userid));
+         
+        newProject.setUsers(userList);
+        newProject.setCreationdate(new Date());
+        newProject.setIsPublic(Boolean.TRUE);
+        
+        projectFacade.create(newProject);*/
+        
         return projectFacade.findAll();
+    }
+    
+    /**
+     * 
+     * @param publicity - the publicity of the project.
+     */
+    public void setPublicity(String publicity) {
+        this.publicity = publicity;
+    }
+    
+    /**
+     * 
+     * @return the publicity of the project.
+     */
+    public String getPublicity(){
+        return this.publicity;
     }
 }

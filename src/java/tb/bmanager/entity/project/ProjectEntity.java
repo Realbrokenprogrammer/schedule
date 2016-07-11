@@ -19,13 +19,17 @@ package tb.bmanager.entity.project;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -33,6 +37,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import tb.bmanager.entity.UserEntity;
 
 /**
  * ProjectEntity acts like a model for the Projects table in the database.
@@ -88,6 +93,13 @@ public class ProjectEntity implements Serializable {
     @Size(max = 255)
     @Column(name = "websiteurl")
     private String websiteurl;
+    @ManyToMany()
+    @JoinTable(name="USER_PROJECTS", 
+            joinColumns=
+                    {@JoinColumn(name="projectid")}, 
+            inverseJoinColumns=
+                    {@JoinColumn(name="userid")})
+    private List<UserEntity> users;
 
     public ProjectEntity() {
     }
@@ -254,6 +266,14 @@ public class ProjectEntity implements Serializable {
      */
     public void setWebsiteurl(String websiteurl) {
         this.websiteurl = websiteurl;
+    }
+    
+    public List<UserEntity> getUsers() {
+       return users;
+    }
+    
+    public void setUsers(List<UserEntity> users) {
+        this.users = users;
     }
 
     @Override

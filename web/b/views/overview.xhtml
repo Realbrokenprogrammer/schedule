@@ -15,7 +15,7 @@
 		<!-- Projects overview -->
 		<section>
 			<h:form id="form">
-			    <p:dataGrid var="car" value="#{projectManagedBean.getUserProjects(USER.id)}" columns="2" layout="grid"
+			    <p:dataGrid var="car" value="#{userManagedBean.getAllUserProjects(USER.id)}" columns="2" layout="grid"
 			        rows="12" paginator="true" id="cars"
 			        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			        rowsPerPageTemplate="6,12,16" emptyMessage="You are not a member of any projects.">
@@ -27,7 +27,7 @@
 			        <p:panel header="#{car.id}" style="text-align:center">
 			            <h:panelGrid columns="1" style="width:100%">
 			 
-			                <h:outputText value="#{car.email}" />
+			                <h:outputText value="#{car.name}" />
 			 
 			            </h:panelGrid>
 			        </p:panel>

@@ -25,6 +25,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.omnifaces.util.Messages;
 import tb.bmanager.entity.UserEntity;
+import tb.bmanager.entity.project.ProjectEntity;
+import tb.bmanager.entitymanager.ProjectEntityFacade;
 import tb.bmanager.entitymanager.UserEntityFacade;
 
 /**
@@ -41,6 +43,9 @@ public class UserManagedBean {
     
     @EJB
     private UserEntityFacade userFacade;
+    
+    @EJB
+    private ProjectEntityFacade projectFacade;
     
     private String username;
     private String password;
@@ -87,23 +92,18 @@ public class UserManagedBean {
         return userFacade.find(id);
     }
     
+    public List<ProjectEntity> getAllUserProjects(int userid) {
+        UserEntity currentUser = userFacade.find(userid);
+        System.out.println("God all of this users projects.");
+        return currentUser.getUserprojects();
+    }
+    
     /**
      * Uses the UserEntityFacade to return the amount user records.
      * @return 
      */
     public int count() {
         return userFacade.count();
-    }
-    
-    /**
-     * Uses the UserEntityFacade to delete specified user record.
-     * 
-     * @param u - Target user record to be deleted.
-     * @return - null
-     */
-    public String delete(UserEntity u) {
-        userFacade.remove(u);
-        return null; //Error logging ?
     }
     
     /**

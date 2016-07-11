@@ -11,5 +11,41 @@
 
 		        <p>{{ message }}</p>
 		</div>
+
+		<h:form id="createProj">
+                <table class="centered">
+                    <tr>
+                        <td><h:outputText value="Project name:" /></td>
+                        <td>
+                            <p:inputText id="pname" value="#{loginManagedBean.username}"
+                                required="true" requiredMessage="Enter a project name."
+                                validatorMessage="Name too long or conatins illegal characters.">
+                                <f:validateRegex pattern="^[A-Za-z0-9_-]{3,20}$" />
+                            </p:inputText>
+                        </td>
+                        <td><h:message for="pname" style="color:red" /></td>
+                    </tr>
+                    <tr>
+                        <td><h:outputText value="Description " /><span>(Optional)</span></td>
+                        <td>
+                            <p:inputText id="uname" value="#{loginManagedBean.username}"
+                                required="false">
+                            </p:inputText>
+                        </td>
+                        <td><h:message for="uname" style="color:red" /></td>
+                    </tr>
+                    <tr>
+					    <p:selectOneRadio id="publicity" value="#{projectManagedBean.publicity}" styleClass="centered" layout="grid" columns="1">
+					        <f:selectItem itemLabel="Public" itemValue="public"/>
+					        <f:selectItem itemLabel="Private" itemValue="private"/>
+					    </p:selectOneRadio>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:commandButton value="Create project" id="nonAjax" styleClass="centered" actionListener="#{loginManagedBean.verifyLogin()}" ajax="false" />
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
 	</div>
 </ui:fragment>
