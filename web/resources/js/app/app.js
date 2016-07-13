@@ -71,5 +71,12 @@ BManagerApp.controller('projectController', function($scope, $http, $routeParams
 
     $scope.projectId = $routeParams.projectid;
     $scope.message = 'Viewing project number' + $scope.projectId;
-    
+
+    document.getElementById("formId:x").value = $scope.projectId;
+    $myBtn = document.getElementById("formId:ajax");
+    $myBtn.click(); //Click the form button
+    $myBtn = null;
+
+    //Remove autosubmitted form.
+    $('#formId').remove();
 });

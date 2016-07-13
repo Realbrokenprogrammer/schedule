@@ -60,7 +60,7 @@ public class ProjectManagedBean implements Serializable{
     }
     
     public void init() {
-        System.out.println("Called for");
+        System.out.println("Called for ");
 
         project = projectFacade.find(projectId);
 
@@ -71,9 +71,9 @@ public class ProjectManagedBean implements Serializable{
     
     public void init(int projectid) {
         System.out.println("Called for id: " + projectid);
-        project = projectFacade.find(projectId);
+        this.project = projectFacade.find(projectId);
 
-        if (project == null) {
+        if (this.project == null) {
             Messages.addGlobalError("Bad request, unknown user.");
         }
     }
@@ -153,6 +153,7 @@ public class ProjectManagedBean implements Serializable{
       * @param projectId - the project id of the project object.
       */
     public void setProjectId(int projectId) {
+        System.out.println("Attempt to set projectId to: " + projectId);
         this.projectId = projectId;
     }
     

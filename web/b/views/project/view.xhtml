@@ -5,33 +5,40 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ac="http://beyondjava.net/angularFacesCore">
+      xmlns:ac="http://beyondjava.net/angularFacesCore"
+      xmlns:o="http://omnifaces.org/ui"
+	  xmlns:of="http://omnifaces.org/functions">
 
-    <ngsync value="{{projectManagedBeans.project}}" direction="serverToClient" />
+    <ngsync value="{{projectManagedBean.projectId}}" direction="serverToClient" />
+    <ngsync value="{{projectManagedBean.project.id}}" direction="serverToClient" />
+    <ngsync value="{{projectManagedBean.project.name}}" direction="serverToClient" />
+    <ngsync value="{{projectManagedBean.project.description}}" direction="serverToClient" />
+    
 
 	<div class="jumbotron text-center">
 	        <h1>Create Project</h1>
 
 	        <p>{{ message }}</p>
-	</div>  
+	</div>
+
+	<!-- AutoSubmitted form telling backend what project to load. -->
+	<h:form id="formId">
+		<h:inputHidden id="x" value="#{projectManagedBean.projectId}" />
+	    <p:commandButton id="ajax" actionListener="#{projectManagedBean.init()}" update=":theproject"/>
+	</h:form>  
 
     <h1>Now in project view</h1>
     <h:outputText value="{{projectId}}" />
 
-    <h:panelGrid columns="2">
+    <h:panelGrid id="theproject" columns="2">
         <h:outputText value="ID" />
-        
+        <h:outputText value="#{projectManagedBean.project.id}" />
 
         <h:outputText value="Name" />
         <h:outputText value="#{projectManagedBean.project.name}" />
 
-        <h:outputText value="Email" />
+        <h:outputText value="Description" />
         <h:outputText value="#{projectManagedBean.project.description}" />
     </h:panelGrid>
-
-    <h:form>
-    <h:outputText id="bob" value="{{projectManagedBean.project.id}}" />
-		<p:commandButton value="Create project" id="ajax" update="bob" actionListener="#{projectManagedBean.init()}" styleClass="ui-priority-primary" />
-	</h:form>
 
 </ui:fragment>
