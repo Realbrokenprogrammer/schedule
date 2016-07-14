@@ -5,36 +5,31 @@
  */
 
  // Define the `BManager` module
-var BManagerApp = angular.module('BManager', ['ngRoute', "angularfaces"]);
+var BManagerApp = angular.module('BManager', [
+    'ngRoute', 
+    "angularfaces",
 
-// configure our routes
-BManagerApp.config(function($routeProvider) {
-    $routeProvider
+    //Constant
 
-        // route for the home page
-        .when('/', {
-            templateUrl : 'views/overview.xhtml',
-            controller  : 'mainController'
-        })
+    //templates
 
-        // route for the about page
-        .when('/project/create', {
-            templateUrl : 'views/project/create.xhtml',
-            controller  : 'aboutController'
-        })
+    //App
+    'BManager.routes',
 
-        // route for the about page
-        .when('/project/view/:projectid', {
-            templateUrl : 'views/project/view.xhtml',
-            controller  : 'projectController'
-        })
+    //Models
 
-        // route for the contact page
-        .when('/contact', {
-            templateUrl : 'pages/contact.html',
-            controller  : 'contactController'
-        });
-});
+    //Config
+
+    //Services
+
+    //Directives
+
+    //Filters
+
+    //Controllers
+    'BManager.controllers.Project'
+    ]);
+
 
 // create the controller and inject Angular's $scope
 BManagerApp.controller('mainController', function($scope) {
@@ -64,19 +59,3 @@ BManagerApp.controller('contactController', function($scope) {
     $scope.message = 'Contact us! JK. This is just a demo.';
 });
 
-BManagerApp.controller('projectController', function($scope, $http, $routeParams) {
-    // This initializes the Angular Model with the values of the JSF
-    // bean attributes
-    initJSFScope($scope);
-
-    $scope.projectId = $routeParams.projectid;
-    $scope.message = 'Viewing project number' + $scope.projectId;
-
-    document.getElementById("formId:x").value = $scope.projectId;
-    $myBtn = document.getElementById("formId:ajax");
-    $myBtn.click(); //Click the form button
-    $myBtn = null;
-
-    //Remove autosubmitted form.
-    $('#formId').remove();
-});
