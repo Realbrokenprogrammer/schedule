@@ -1,5 +1,7 @@
 // Colors
 $purple: #7a325d
+$darkPurple: #44072C
+$lightPurple: #B87DA1
 $primary: $purple
 $black: #202020
 
@@ -20,3 +22,33 @@ $black: #202020
 .github
   color: $black !important // Override bulma
   border-color: $black
+
+.schedule-container
+  margin: 0
+  padding: 0
+  border: 0
+  font-size: 100%
+  font: inherit
+  vertical-align: baseline
+  .event
+    padding: 20px
+    margin-top: 10px
+    border: 1px solid $purple
+    text-align: center
+    .event-title
+      font-size: 25px
+      margin-bottom: 10px
+      a
+      color: $purple
+      text-decotation: none
+    .event-time
+      color: $lightPurple
+      font-size: 15px
+    .event-description
+      margin-top: 20px
+      text-align: left
+      color: $darkPurple
+      line-height: 20px
+      width: 80%
+      margin-left: auto
+      margin-right: auto

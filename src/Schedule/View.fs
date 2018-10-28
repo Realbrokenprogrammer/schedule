@@ -29,6 +29,7 @@ let event e =
             [ str e.title ]] 
       div
         [ ClassName "event-time" ]
+        //TODO: Fix date and time representation.
         [ p [] [ str (e.time.ToString()) ]]
       div
         [ ClassName "event-description" ]
@@ -40,6 +41,8 @@ let root model dispatch =
     getSchedule dispatch
   
   div 
-    [Id "schedule-container"] 
+    [ClassName "schedule-container"]
+    //TODO: Organize event ordering depending on days.
+    //TODO: Display a couple of more events than 7. (Past and future)
     [for e in model.events do
       yield event e]
