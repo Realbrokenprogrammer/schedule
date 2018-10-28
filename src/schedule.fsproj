@@ -7,6 +7,9 @@
     <Compile Include="Global.fs" />
     <!-- Info -->
     <Compile Include="Info/View.fs" />
+    <!-- Schedule -->
+    <Compile Include="Schedule/Types.fs" />
+    <Compile Include="Schedule/View.fs" />
     <!-- Home -->
     <Compile Include="Home/Types.fs" />
     <Compile Include="Home/State.fs" />

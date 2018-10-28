@@ -10,6 +10,7 @@ open Types
 let pageParser: Parser<Page->Page,Page> =
   oneOf [
     map About (s "about")
+    map Schedule (s "schedule")
     map Home (s "home")
   ]
 

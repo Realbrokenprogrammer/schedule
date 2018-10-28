@@ -33,6 +33,7 @@ let menu currentPage =
       ul
         [ ClassName "menu-list" ]
         [ menuItem "Home" Home currentPage
+          menuItem "Schedule" Page.Schedule currentPage
           menuItem "About" Page.About currentPage ] ]
 
 let root model dispatch =
@@ -40,6 +41,7 @@ let root model dispatch =
   let pageHtml =
     function
     | Page.About -> Info.View.root
+    | Page.Schedule -> Schedule.View.root
     | Home -> Home.View.root model.home (HomeMsg >> dispatch)
 
   div
