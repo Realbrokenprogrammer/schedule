@@ -30,6 +30,16 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.8.2"
+    "webpack-dev-server": "^2.8.2",
+    "macaddress": ">=0.2.9",
+    "randomatic": ">=3.0.0",
+    "cryptiles": ">=4.1.2",
+    "sshpk": ">=1.13.2",
+    "url-parse": ">=1.4.3",
+    "debug": ">=2.6.9",
+    "lodash": ">=4.17.5",
+    "tough-cookie": ">=2.3.3",
+    "mime": ">=1.4.1",
+    "hoek": ">=4.2.1"
   }
 }
