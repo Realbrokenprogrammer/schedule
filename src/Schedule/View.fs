@@ -11,41 +11,35 @@ open Types
 open Fable.Core
 open Elmish.React.Components
 
-let getSchedule = 
+let getSchedule dispatch = 
   promise {
       let! res = fetch "https://realbrokenprogrammer.github.io/api/schedule.json" []
       let! json = res.text()
       let t = ofJson<Schedule> json
-      console.log(t)
-      return t
+      Update t |> dispatch
     } |> Promise.start
 
-let event dateTime title description url = 
+let event e = 
   div
     [ ClassName "event" ]
     [ h1
-        [  ]
-        [ str title ] ]
+        [ ClassName "event-title" ]
+        [ a 
+            [ Href e.url ] 
+            [ str e.title ]] 
+      div
+        [ ClassName "event-time" ]
+        [ p [] [ str (e.time.ToString()) ]]
+      div
+        [ ClassName "event-description" ]
+        [ p [] [ str e.description ]]]
 
-let tt title = 
-  let d = document.createElement("p")
-  d.textContent <- title
-  d
-
-let renderSchedule (schedule : Schedule) = 
-  let scheduleContainer = document.querySelector("#schedule-container")
+let root model dispatch = 
+  //TODO: getSchedule should only be called once on startup.
+  if model.events.Length = 0 then
+    getSchedule dispatch
   
-  for e in schedule.events do
-    scheduleContainer.appendChild(tt e.title) |> ignore
-
-let root = 
-  let t = div [Id "schedule-container"] []
-  
-
-  fetch "https://realbrokenprogrammer.github.io/api/schedule.json" []
-  |> Promise.bind(fun res -> res.text())
-  |> Promise.map(fun txt -> ofJson<Schedule> txt)
-  |> Promise.map(renderSchedule)
-  |> Promise.start
-
-  t
+  div 
+    [Id "schedule-container"] 
+    [for e in model.events do
+      yield event e]

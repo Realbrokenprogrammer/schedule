@@ -15,3 +15,8 @@ type Schedule = {
         timezone : string
     } with
     static member Default() = {events = Array.empty; timezone = ""}
+
+type Model = Schedule
+
+type Msg = 
+    | Update of Schedule

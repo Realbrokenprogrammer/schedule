@@ -24,10 +24,12 @@ let urlUpdate (result: Option<Page>) model =
 
 let init result =
   let (home, homeCmd) = Home.State.init()
+  let schedule = Schedule.State.init()
   let (model, cmd) =
     urlUpdate result
       { currentPage = Home
-        home = home }
+        home = home 
+        schedule = schedule}
   model, Cmd.batch [ cmd
                      Cmd.map HomeMsg homeCmd ]
 
@@ -36,3 +38,6 @@ let update msg model =
   | HomeMsg msg ->
       let (home, homeCmd) = Home.State.update msg model.home
       { model with home = home }, Cmd.map HomeMsg homeCmd
+  | ScheduleMsg msg -> 
+    let schedule = Schedule.State.update msg model.schedule
+    { model with schedule = schedule}, Cmd.none
