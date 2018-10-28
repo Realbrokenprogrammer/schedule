@@ -1,15 +1,25 @@
-# BManager
+# schedule
 
-[![Join the chat at https://gitter.im/TeamBreak/BManager](https://badges.gitter.im/TeamBreak/BManager.svg)](https://gitter.im/TeamBreak/BManager?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Schedule
 
-A productivity tool to help you structure your project process. BManager will offer the user to choose what kind of tool that is needed. 
+## Requirements
 
-BManager is built in Java using JSF together with PrimeFaces and runs on GlassFish.
+* [dotnet SDK](https://www.microsoft.com/net/download/core) 2.0.0 or higher
+* [node.js](https://nodejs.org) 4.8.2 or higher
+* npm5: JS package manager
 
-# Contributing
+## Running the app
 
-## Reporting issues
-To file a bug report, please visit the [GitHub issues page](https://github.com/TeamBreak/BManager/issues).  It's great if you can attach code but any bug reports are welcome.
+* Install JS dependencies: `npm install`
+* **Move to `src` folder**: `cd src`
+* Install F# dependencies: `dotnet restore`
+* Start Fable daemon and [Webpack](https://webpack.js.org/) dev server: `dotnet fable npm-start`
+* In your browser, open: http://localhost:8080/
 
-## Code Review
-It is easy to make mistakes, if you would notice some bad programming do not hesitate to report it as an issue at the [GitHub issues page](https://github.com/TeamBreak/BManager/issues).
+# Building the app
+
+* Install JS dependencies: `npm install`
+* **Move to `src` folder**: `cd src`
+* Install F# dependencies: `dotnet restore`
+* Build Fable daemon and [Webpack](https://webpack.js.org/): `dotnet fable npm-build`
+* Navigate to `public\index.html` and open it.
