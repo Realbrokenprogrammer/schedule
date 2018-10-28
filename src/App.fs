@@ -41,8 +41,8 @@ let root model dispatch =
   let pageHtml =
     function
     | Page.About -> Info.View.root
-    | Page.Schedule -> Schedule.View.root
-    | Home -> Home.View.root model.home (HomeMsg >> dispatch)
+    | Page.Schedule -> Schedule.View.root model.schedule (ScheduleMsg >> dispatch)
+    | Home          -> Home.View.root     model.home     (HomeMsg     >> dispatch)
 
   div
     []
