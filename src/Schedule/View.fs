@@ -18,29 +18,31 @@ let getSchedule dispatch =
       Update t |> dispatch
     } |> Promise.start
 
+let dateFormat date =
+  Format.localFormat Local.english date "MMM dd, yyyy hh:mm tt"
+
+
 let event (e : Event) = 
-  let time = e.ToEventTime()
+  let eventDay = e.days.[0]
+  let eventTimeFrame = e.ToEventTime()
 
-  let dateFormat date =
-      Format.localFormat Local.english date "MMM dd, yyyy hh:mm tt"
-
-  let dateTime = 
+  let eventTime = 
     let addTime (date : DateTime) = 
       date.Add(e.time.TimeOfDay)
-    match time with
-    | Past -> DateTime.Today.Subtract(TimeSpan.FromDays(float (int DateTime.Today.DayOfWeek - e.days.[0])))
+    match eventTimeFrame with
+    | Past    -> DateTime.Today.Subtract(TimeSpan.FromDays(float (int DateTime.Today.DayOfWeek - eventDay)))
     | Current -> DateTime.Today
-    | Future -> DateTime.Today.AddDays(float (e.days.[0] - int DateTime.Today.DayOfWeek))
+    | Future  -> DateTime.Today.AddDays(float (eventDay - int DateTime.Today.DayOfWeek))
     |> addTime
 
   let countDown = 
-    match time with
-    | Past -> sprintf "Finished %d hours ago." (DateTime.Now.Subtract(dateTime.TimeOfDay).TimeOfDay.Hours)
-    | Current -> sprintf "Starts in %d hours." (dateTime.Subtract(DateTime.Now.TimeOfDay).Hour)
-    | Future -> sprintf "Starts in %d days." (e.days.[0] - int DateTime.Today.DayOfWeek)
+    match eventTimeFrame with
+    | Past    -> sprintf "Finished %d hours ago." (DateTime.Now.Subtract(eventTime.TimeOfDay).TimeOfDay.Hours)
+    | Current -> sprintf "Starts in %d hours."    (eventTime.Subtract(DateTime.Now.TimeOfDay).Hour)
+    | Future  -> sprintf "Starts in %d days."     (eventDay - int DateTime.Today.DayOfWeek)
 
   div
-    [ classList [ ("event", true); ("past", time = Past); ("current", time = Current) ] ]
+    [ classList [ ("event", true); ("past", eventTimeFrame = Past); ("current", eventTimeFrame = Current) ] ]
     [ h1
         [ ClassName "event-title" ]
         [ a 
@@ -48,7 +50,7 @@ let event (e : Event) =
             [ str e.title ]] 
       div
         [ ClassName "event-time" ]
-        [ p [] [ str (dateTime |> dateFormat) ]
+        [ p [] [ str (eventTime |> dateFormat) ]
           p [] [ str (countDown) ]]
       div
         [ ClassName "event-description" ]
