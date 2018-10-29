@@ -20,7 +20,11 @@ type Event = {
 
         match (eventDay, day) with
         | (eventDay, day) when eventDay < day -> Past
-        | (eventDay, day) when eventDay = day -> Current
+        | (eventDay, day) when eventDay = day -> 
+            if (DateTime.Now.TimeOfDay > x.time.TimeOfDay) then
+                Past
+            else
+                Current
         | (eventDay, day) when eventDay > day -> Future
         | _ -> Future
 

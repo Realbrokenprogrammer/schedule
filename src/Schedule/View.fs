@@ -20,15 +20,24 @@ let getSchedule dispatch =
 
 let event (e : Event) = 
   let time = e.ToEventTime()
-  
+
+  let dateFormat date =
+      Format.localFormat Local.english date "MMM dd, yyyy hh:mm tt"
+
   let dateTime = 
-    let dateFormat date = 
-      Format.localFormat Local.english date "MMM dd, yyyy"
+    let addTime (date : DateTime) = 
+      date.Add(e.time.TimeOfDay)
     match time with
     | Past -> DateTime.Today.Subtract(TimeSpan.FromDays(float (int DateTime.Today.DayOfWeek - e.days.[0])))
     | Current -> DateTime.Today
     | Future -> DateTime.Today.AddDays(float (e.days.[0] - int DateTime.Today.DayOfWeek))
-    |> dateFormat
+    |> addTime
+
+  let countDown = 
+    match time with
+    | Past -> sprintf "Finished %d hours ago." (DateTime.Now.Subtract(dateTime.TimeOfDay).TimeOfDay.Hours)
+    | Current -> sprintf "Starts in %d hours." (dateTime.Subtract(DateTime.Now.TimeOfDay).Hour)
+    | Future -> sprintf "Starts in %d days." (e.days.[0] - int DateTime.Today.DayOfWeek)
 
   div
     [ classList [ ("event", true); ("past", time = Past); ("current", time = Current) ] ]
@@ -39,9 +48,7 @@ let event (e : Event) =
             [ str e.title ]] 
       div
         [ ClassName "event-time" ]
-        //TODO: Fix date and time representation.
-                // Mon, Oct 29, 2018 14:00 (Countdown (Starts in... 5 hours))
-        [ p [] [ str (dateTime) ]]
+        [ p [] [ str (dateTime |> dateFormat); str (string countDown) ]]
       div
         [ ClassName "event-description" ]
         [ p [] [ str e.description ]]]
@@ -53,7 +60,6 @@ let root model dispatch =
 
   div 
     [ClassName "schedule-container"]
-    //TODO: Organize event ordering depending on days.
     //TODO: Display a couple of more events than 7. (Past and future)
     [for e in model.SortEvents() do
       yield event e]
