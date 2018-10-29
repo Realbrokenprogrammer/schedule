@@ -2,6 +2,10 @@ module Schedule.Types
 
 open System
 
+type EventTime = 
+    | Past
+    | Current
+    | Future
 
 type Event = {
         time        : DateTime
@@ -9,22 +13,16 @@ type Event = {
         description : string
         url         : string
         days        : int[]
-    }
+    } with
+    member x.ToEventTime() = 
+        let eventDay = x.days.[0]
+        let day = (int) DateTime.Today.DayOfWeek
 
-type EventTime = 
-    | Past
-    | Current
-    | Future
-    with 
-        static member fromEvent e day =
-            let eventDay = e.days.[0]
-            
-            match (eventDay, day) with
-            | (eventDay, day) when eventDay < day -> Past
-            | (eventDay, day) when eventDay = day -> Current
-            | (eventDay, day) when eventDay > day -> Future
-            | _ -> Future
-
+        match (eventDay, day) with
+        | (eventDay, day) when eventDay < day -> Past
+        | (eventDay, day) when eventDay = day -> Current
+        | (eventDay, day) when eventDay > day -> Future
+        | _ -> Future
 
 type Schedule = {
         events   : Event[]
