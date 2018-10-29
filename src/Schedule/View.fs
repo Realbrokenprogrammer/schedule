@@ -6,9 +6,7 @@ open Fable.PowerPack
 open Fable.PowerPack.Fetch
 open Fable.PowerPack.Date
 open Fable.Core.JsInterop
-open Fable.Import.Browser
 open Types
-open System
 
 let getSchedule dispatch = 
   promise {
@@ -22,39 +20,23 @@ let dateFormat date =
   Format.localFormat Local.english date "MMM dd, yyyy hh:mm tt"
 
 
-let event (e : Event) = 
-  let eventDay = e.days.[0]
-  let eventTimeFrame = e.ToEventTime()
-
-  let eventTime = 
-    let addTime (date : DateTime) = 
-      date.Add(e.time.TimeOfDay)
-    match eventTimeFrame with
-    | Past    -> DateTime.Today.Subtract(TimeSpan.FromDays(float (int DateTime.Today.DayOfWeek - eventDay)))
-    | Current -> DateTime.Today
-    | Future  -> DateTime.Today.AddDays(float (eventDay - int DateTime.Today.DayOfWeek))
-    |> addTime
-
-  let countDown = 
-    match eventTimeFrame with
-    | Past    -> sprintf "Finished %d hours ago." (DateTime.Now.Subtract(eventTime.TimeOfDay).TimeOfDay.Hours)
-    | Current -> sprintf "Starts in %d hours."    (eventTime.Subtract(DateTime.Now.TimeOfDay).Hour)
-    | Future  -> sprintf "Starts in %d days."     (eventDay - int DateTime.Today.DayOfWeek)
+let event (targetEvent : Event) = 
+  let eventTimeFrame = targetEvent.ToEventTime()
 
   div
     [ classList [ ("event", true); ("past", eventTimeFrame = Past); ("current", eventTimeFrame = Current) ] ]
     [ h1
         [ ClassName "event-title" ]
         [ a 
-            [ Href e.url ] 
-            [ str e.title ]] 
+            [ Href targetEvent.url ] 
+            [ str targetEvent.title ]] 
       div
         [ ClassName "event-time" ]
-        [ p [] [ str (eventTime |> dateFormat) ]
-          p [] [ str (countDown) ]]
+        [ p [] [ str (targetEvent.GetDateTime() |> dateFormat) ]
+          p [] [ str (targetEvent.GetCountdown()) ]]
       div
         [ ClassName "event-description" ]
-        [ p [] [ str e.description ]]]
+        [ p [] [ str targetEvent.description ]]]
 
 let root model dispatch = 
   //TODO: getSchedule should only be called once on startup.

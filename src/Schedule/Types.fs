@@ -27,6 +27,26 @@ type Event = {
                 Current
         | (eventDay, day) when eventDay > day -> Future
         | _ -> Future
+    member x.GetDateTime() =
+        let eventDay = x.days.[0]
+        let eventTimeFrame = x.ToEventTime()
+        
+        let addTime (date : DateTime) = 
+          date.Add(x.time.TimeOfDay)
+        match eventTimeFrame with
+        | Past    -> DateTime.Today.Subtract(TimeSpan.FromDays(float (int DateTime.Today.DayOfWeek - eventDay)))
+        | Current -> DateTime.Today
+        | Future  -> DateTime.Today.AddDays(float (eventDay - int DateTime.Today.DayOfWeek))
+        |> addTime
+    member x.GetCountdown() =
+        let eventDay = x.days.[0]
+        let eventTimeFrame = x.ToEventTime()
+        let eventTime = x.GetDateTime()
+
+        match eventTimeFrame with
+        | Past    -> sprintf "Finished %d hours ago." (DateTime.Now.Subtract(eventTime.TimeOfDay).TimeOfDay.Hours)
+        | Current -> sprintf "Starts in %d hours."    (eventTime.Subtract(DateTime.Now.TimeOfDay).Hour)
+        | Future  -> sprintf "Starts in %d days."     (eventDay - int DateTime.Today.DayOfWeek)
 
 type Schedule = {
         events   : Event[]
