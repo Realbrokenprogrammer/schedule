@@ -16,7 +16,7 @@ type Event = {
     } with
     member x.ToEventTime() = 
         let eventDay = x.days.[0]
-        let day = (int) DateTime.Today.DayOfWeek
+        let day = int DateTime.Today.DayOfWeek
 
         match (eventDay, day) with
         | (eventDay, day) when eventDay < day -> Past

@@ -4,6 +4,7 @@ open Fable.Helpers.React
 open Fable.Helpers.React.Props
 open Fable.PowerPack
 open Fable.PowerPack.Fetch
+open Fable.PowerPack.Date
 open Fable.Core.JsInterop
 open Fable.Import.Browser
 open Types
@@ -20,6 +21,15 @@ let getSchedule dispatch =
 let event (e : Event) = 
   let time = e.ToEventTime()
   
+  let dateTime = 
+    let dateFormat date = 
+      Format.localFormat Local.english date "MMM dd, yyyy"
+    match time with
+    | Past -> DateTime.Today.Subtract(TimeSpan.FromDays(float (int DateTime.Today.DayOfWeek - e.days.[0])))
+    | Current -> DateTime.Today
+    | Future -> DateTime.Today.AddDays(float (e.days.[0] - int DateTime.Today.DayOfWeek))
+    |> dateFormat
+
   div
     [ classList [ ("event", true); ("past", time = Past); ("current", time = Current) ] ]
     [ h1
@@ -30,7 +40,8 @@ let event (e : Event) =
       div
         [ ClassName "event-time" ]
         //TODO: Fix date and time representation.
-        [ p [] [ str (e.time.ToString()) ]]
+                // Mon, Oct 29, 2018 14:00 (Countdown (Starts in... 5 hours))
+        [ p [] [ str (dateTime) ]]
       div
         [ ClassName "event-description" ]
         [ p [] [ str e.description ]]]
