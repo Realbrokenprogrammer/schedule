@@ -4,12 +4,10 @@ open Fable.Helpers.React
 open Fable.Helpers.React.Props
 open Fable.PowerPack
 open Fable.PowerPack.Fetch
-open Fable.PowerPack.Result
 open Fable.Core.JsInterop
 open Fable.Import.Browser
 open Types
-open Fable.Core
-open Elmish.React.Components
+open System
 
 let getSchedule dispatch = 
   promise {
@@ -19,9 +17,11 @@ let getSchedule dispatch =
       Update t |> dispatch
     } |> Promise.start
 
-let event e = 
+let event (e : Event) = 
+  let time = e.ToEventTime()
+  
   div
-    [ ClassName "event" ]
+    [ classList [ ("event", true); ("past", time = Past); ("current", time = Current) ] ]
     [ h1
         [ ClassName "event-title" ]
         [ a 
@@ -39,10 +39,10 @@ let root model dispatch =
   //TODO: getSchedule should only be called once on startup.
   if model.events.Length = 0 then
     getSchedule dispatch
-  
+
   div 
     [ClassName "schedule-container"]
     //TODO: Organize event ordering depending on days.
     //TODO: Display a couple of more events than 7. (Past and future)
-    [for e in model.events do
+    [for e in model.SortEvents() do
       yield event e]
