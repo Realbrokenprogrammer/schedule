@@ -17,13 +17,11 @@ let getSchedule dispatch =
       Update t |> dispatch
     } |> Promise.start
 
-//TODO: Sort days and order them depending on day in the week.
-//  Day 1: Monday, Day 7: Sunday
-let event e = 
-  let time = EventTime.fromEvent e ((int) DateTime.Today.DayOfWeek)
+let event (e : Event) = 
+  let time = e.ToEventTime()
   
   div
-    [ classList [ ("event", true); ("past", time = Past) ] ]
+    [ classList [ ("event", true); ("past", time = Past); ("current", time = Current) ] ]
     [ h1
         [ ClassName "event-title" ]
         [ a 
