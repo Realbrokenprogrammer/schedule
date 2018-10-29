@@ -48,7 +48,8 @@ let event (e : Event) =
             [ str e.title ]] 
       div
         [ ClassName "event-time" ]
-        [ p [] [ str (dateTime |> dateFormat); str (string countDown) ]]
+        [ p [] [ str (dateTime |> dateFormat) ]
+          p [] [ str (countDown) ]]
       div
         [ ClassName "event-description" ]
         [ p [] [ str e.description ]]]
