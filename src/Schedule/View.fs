@@ -25,7 +25,13 @@ let event (targetEvent : Event) =
 
   div
     [ classList [ ("event", true); ("past", eventTimeFrame = Past); ("current", eventTimeFrame = Current) ] ]
-    [ h1
+    [ div 
+        [ ClassName "event-twitch"]
+           [ a [ classList [("not-showing", eventTimeFrame <> Current); ("event-watch", true);]
+                 Href "https://www.twitch.tv/realbrokenprogrammer"]
+               [ i [classList [("fa", true); ("fa-twitch", true); ("fa-3x", true); ("aria-hidden", true)]]
+                   []]]
+      h1
         [ ClassName "event-title" ]
         [ a 
             [ Href targetEvent.url ] 

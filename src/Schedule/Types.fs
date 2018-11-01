@@ -1,5 +1,6 @@
 module Schedule.Types
 
+open Fable.Import.Browser
 open System
 
 type EventTime = 
@@ -21,10 +22,12 @@ type Event = {
         match (eventDay, day) with
         | (eventDay, day) when eventDay < day -> Past
         | (eventDay, day) when eventDay = day -> 
-            if (DateTime.Now.TimeOfDay > x.time.TimeOfDay) then
-                Past
-            else
+            let secondsDifference = abs (x.time.TimeOfDay.TotalSeconds - DateTime.Now.TimeOfDay.TotalSeconds)
+            console.log(secondsDifference)
+            if (0.0 <= secondsDifference && secondsDifference < 4.0 * 60.0 * 60.0) then
                 Current
+            else
+                Past
         | (eventDay, day) when eventDay > day -> Future
         | _ -> Future
     member x.GetDateTime() =
@@ -45,7 +48,13 @@ type Event = {
 
         match eventTimeFrame with
         | Past    -> sprintf "Finished %d hours ago." (DateTime.Now.Subtract(eventTime.TimeOfDay).TimeOfDay.Hours)
-        | Current -> sprintf "Starts in %d hours."    (eventTime.Subtract(DateTime.Now.TimeOfDay).Hour)
+        | Current ->
+            let timeDifference = (DateTime.Now.TimeOfDay.Subtract(eventTime.TimeOfDay))
+            match timeDifference with
+            | timeDifference when timeDifference.Hours = 0 -> 
+                sprintf "Started %d minutes ago."    (timeDifference.Minutes)
+            | _ -> 
+                sprintf "Started %d hours ago."    (timeDifference.Hours)
         | Future  -> sprintf "Starts in %d days."     (eventDay - int DateTime.Today.DayOfWeek)
 
 type Schedule = {
