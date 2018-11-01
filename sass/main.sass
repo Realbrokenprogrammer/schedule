@@ -8,6 +8,11 @@ $grey: #515151
 
 @import '../node_modules/bulma/bulma'
 
+.header
+  text-align: center
+  h1
+    font-size: 50px
+
 .navbar-bg
   background-color: $black
   .nav
@@ -24,6 +29,14 @@ $grey: #515151
   color: $black !important // Override bulma
   border-color: $black
 
+.not-showing
+  display: none;
+
+.event-twitch
+  height: 0px;
+  text-align: right
+  color: $purple
+
 .schedule-container
   margin: 0
   padding: 0
@@ -32,6 +45,9 @@ $grey: #515151
   font: inherit
   vertical-align: baseline
   .event
+    width: 60%
+    margin-left: auto
+    margin-right: auto
     padding: 20px
     margin-top: 10px
     border: 1px solid $purple
