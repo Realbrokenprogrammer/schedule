@@ -50,7 +50,18 @@ let root model dispatch =
     getSchedule dispatch
 
   div 
-    [ClassName "schedule-container"]
-    //TODO: Display a couple of more events than 7. (Past and future)
-    [for e in model.SortEvents() do
-      yield event e]
+    [ClassName "header"]
+    [ h1
+        []
+        [str "Stream Schedule"]
+      p 
+        []
+        [ str "Watch me live at "
+          a 
+            [Href "https://www.twitch.tv/realbrokenprogrammer"]
+            [str "twitch.tv/realbrokenprogrammer."]]
+      div 
+        [ClassName "schedule-container"]
+        //TODO: Display a couple of more events than 7. (Past and future)
+        [ for e in model.SortEvents() do
+          yield event e]]
